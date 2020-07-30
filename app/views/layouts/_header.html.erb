@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarHeader">
         <span class="sr-only">Tggle navigation</span>
@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% unless user_signed_in? %>
           <li>
-            <%= link_to '新規登録', new_user_registration_path %>
+            <%= link_to 'ユーザー登録', new_user_registration_path %>
           </li>
           <li>
             <%= link_to 'ログイン', new_user_session_path %>
