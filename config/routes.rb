@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root 'application#hello'
+  root 'surplus_lands#index'
 end
