@@ -8,6 +8,9 @@ Metrics/LineLength:
 Airbnb/OptArgParameters:
   Enabled: false
 
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
 AllCops:
   Exclude:
     - 'db/**/*'
