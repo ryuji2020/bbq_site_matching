@@ -1,4 +1,5 @@
 class SurplusLand < ApplicationRecord
+  has_many_attached :images
   belongs_to :user
   belongs_to :prefecture, foreign_key: 'state', primary_key: 'name'
   validates :title, presence: true, length: { maximum: 50 }
