@@ -7,4 +7,5 @@ class SurplusLand < ApplicationRecord
   validates :state, presence: true
   validates :address, presence: true
   validates :description, presence: true, length: { maximum: 400 }
+  attr_accessor :image_ids
 end
