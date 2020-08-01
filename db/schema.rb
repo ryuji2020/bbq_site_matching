@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_012303) do
+ActiveRecord::Schema.define(version: 2020_08_01_054255) do
 
   create_table "prefectures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_012303) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
     t.index ["state"], name: "index_surplus_lands_on_state"
     t.index ["user_id"], name: "index_surplus_lands_on_user_id"
   end
