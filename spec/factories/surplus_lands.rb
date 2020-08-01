@@ -5,5 +5,9 @@ FactoryBot.define do
     state { "Tokyo" }
     description { "Let's BBQ and Camp !" }
     user { nil }
+
+    trait :with_user do
+      user
+    end
   end
 end

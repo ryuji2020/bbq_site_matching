@@ -15,5 +15,16 @@ RSpec.describe SurplusLand, type: :model do
 
   describe 'association' do
     it { should belong_to :user }
+
+    describe 'references prefecture' do
+      let(:surplus_land) { build(:surplus_land, :with_user) }
+
+      it 'state could save only valid value' do
+        surplus_land.state = '東京'
+        expect(surplus_land).to be_valid
+        surplus_land.state = '新宿'
+        expect(surplus_land).not_to be_valid
+      end
+    end
   end
 end
