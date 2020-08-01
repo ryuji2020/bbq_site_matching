@@ -39,6 +39,8 @@ class SurplusLandsController < ApplicationController
       flash[:success] = '公開所有地情報が変更されました'
       redirect_to root_path # 後で変更
     else
+      @surplus_land.reload
+      @surplus_land.attributes = surplus_land_params_without_images
       render 'edit'
     end
   end
@@ -55,8 +57,17 @@ class SurplusLandsController < ApplicationController
       :state,
       :address,
       :description,
-      :image_ids,
       images: []
+    )
+  end
+
+  def surplus_land_params_without_images
+    params.require(:surplus_land).permit(
+      :title,
+      :price,
+      :state,
+      :address,
+      :description,
     )
   end
 
