@@ -9,7 +9,7 @@
       <p><%= surplus_land.address %></p>
       <p><%= surplus_land.description %></p>
       <%= link_to edit_surplus_land_path(surplus_land) do %>
-        <p><%= image_tag surplus_land.images.first %></p>
+        <p><%= image_tag surplus_land.images.first.variant(resize: '200x200') %></p>
       <% end %>
     </div>
   <% end %>

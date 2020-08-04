@@ -46,6 +46,10 @@ class SurplusLandsController < ApplicationController
   end
 
   def destroy
+    @surplus_land = SurplusLand.find(params[:id])
+    @surplus_land.destroy
+    flash[:success] = '公開所有地を削除しました'
+    redirect_to root_url
   end
 
   private
