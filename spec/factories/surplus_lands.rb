@@ -5,6 +5,7 @@ FactoryBot.define do
     state { "東京" }
     address { '東京都調布市国領町1-2-3' }
     description { "Let's BBQ and Camp !" }
+    images { [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/valid.png'), 'image/png')] }
     user { nil }
 
     association :prefecture

@@ -15,6 +15,29 @@ RSpec.describe SurplusLand, type: :model do
     it { should validate_presence_of :address }
 
     it { should validate_length_of(:description).is_at_most(400) }
+
+    describe 'active-storatge validation' do
+      context 'when image-file size < 5MB' do
+        let(:surplus_land) { build(:surplus_land, :with_user) }
+        it 'should be valid' do
+          expect(surplus_land).to be_valid
+        end
+      end
+
+      context 'when image-file size > 5MB' do
+        let(:surplus_land) do
+          build(
+            :surplus_land,
+            :with_user,
+            images: [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/oversize.jpg'), 'image/jpg')]
+          )
+        end
+
+        it 'should not be valid' do
+          expect(surplus_land).not_to be_valid
+        end
+      end
+    end
   end
 
   describe 'association' do
