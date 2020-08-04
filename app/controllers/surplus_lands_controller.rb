@@ -1,5 +1,6 @@
 class SurplusLandsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_prefecture_array, only: [:new, :create, :edit, :update]
 
   def index
@@ -24,13 +25,11 @@ class SurplusLandsController < ApplicationController
   end
 
   def edit
-    @surplus_land = SurplusLand.find(params[:id])
   end
 
   def update
-    @surplus_land = SurplusLand.find(params[:id])
     if @surplus_land.update_attributes(surplus_land_params)
-      if image_ids = params[:surplus_land][:image_ids]
+      if (image_ids = params[:surplus_land][:image_ids])
         image_ids.each do |image_id|
           image = @surplus_land.images.find(image_id)
           image.purge
@@ -46,7 +45,6 @@ class SurplusLandsController < ApplicationController
   end
 
   def destroy
-    @surplus_land = SurplusLand.find(params[:id])
     @surplus_land.destroy
     flash[:success] = '公開所有地を削除しました'
     redirect_to root_url
@@ -71,11 +69,16 @@ class SurplusLandsController < ApplicationController
       :price,
       :state,
       :address,
-      :description,
+      :description
     )
   end
 
   # before_action
+
+  def correct_user
+    @surplus_land = SurplusLand.find(params[:id])
+    redirect_to root_url unless current_user == @surplus_land.user
+  end
 
   # 都道府県セレクトボックス用の配列を作成
   def set_prefecture_array

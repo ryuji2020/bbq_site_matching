@@ -14,12 +14,15 @@ RSpec.describe SurplusLand, type: :model do
 
     it { should validate_presence_of :address }
 
+    it { should validate_presence_of :description }
+
     it { should validate_length_of(:description).is_at_most(400) }
 
     describe 'active-storatge validation' do
       context 'when image-file size < 5MB' do
         let(:surplus_land) { build(:surplus_land, :with_user) }
-        it 'should be valid' do
+
+        it 'be valid' do
           expect(surplus_land).to be_valid
         end
       end
@@ -33,7 +36,7 @@ RSpec.describe SurplusLand, type: :model do
           )
         end
 
-        it 'should not be valid' do
+        it 'not be valid' do
           expect(surplus_land).not_to be_valid
         end
       end

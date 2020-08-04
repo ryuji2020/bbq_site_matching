@@ -7,7 +7,9 @@ class SurplusLand < ApplicationRecord
   validates :state, presence: true
   validates :address, presence: true
   validates :description, presence: true, length: { maximum: 400 }
-  validates :images, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'],
-                               size_range: 1..5.megabytes }
+  validates :images, blob: {
+    content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+    size_range: 1..5.megabytes
+  }
   attr_accessor :image_ids
 end
