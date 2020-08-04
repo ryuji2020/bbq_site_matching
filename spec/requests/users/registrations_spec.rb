@@ -20,11 +20,15 @@ RSpec.describe "Users::Registrations", type: :request do
     end
 
     context 'with invalid information' do
-      let(:user_params) { { user: {
-        name: 'Invalid User',
-        email: 'invalidaddress',
-        password: 'pass',
-      } } }
+      let(:user_params) do
+        {
+          user: {
+            name: 'Invalid User',
+            email: 'invalidaddress',
+            password: 'pass',
+          }
+        }
+      end
 
       it 'failed to create a new user' do
         expect do
@@ -51,13 +55,15 @@ RSpec.describe "Users::Registrations", type: :request do
     before(:each) { sign_in user }
 
     it 'success to update user information' do
-      put user_registration_path, params: { user: {
-        name: 'Change Name',
-        email: 'change@example.com',
-        gender: 'male',
-        profile: 'hello, i am Change.',
-        current_password: 'password',
-      } }
+      put user_registration_path, params: {
+        user: {
+          name: 'Change Name',
+          email: 'change@example.com',
+          gender: 'male',
+          profile: 'hello, i am Change.',
+          current_password: 'password',
+        }
+      }
       expect(user.reload.name).to eq 'Change Name'
       expect(user.reload.email).to eq 'change@example.com'
       expect(user.reload.gender).to eq 'male'

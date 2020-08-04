@@ -1,0 +1,53 @@
+<%= form_for(@surplus_land) do |f| %>
+  <%= render "users/shared/error_messages", resource: f.object %>
+
+  <div class="form-group">
+    <%= f.label :title, 'タイトル' %><br />
+    <%= f.text_field :title, autofocus: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price, '価格' %><br />
+    <%= f.number_field :price, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :state, '都道府県' %><br />
+    <%= f.select :state, @prefectures, {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address, '住所（市区町村以下を入力してください）' %><br />
+    <%= f.text_field :address, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, '詳細' %><br />
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :images, '画像（複数選択可）' %> <br />
+    <%= f.file_field :images, multiple: true, accept: 'image/png, image/jpeg' %>
+  </div>
+
+  <% if @surplus_land.persisted? %>
+    <p>現在登録されている画像（削除するものはチェックしてください）</p>
+    <% @surplus_land.images.each do |image| %>
+    <%= f.check_box :image_ids, {:multiple => true}, image.id, false %>
+    <%= image_tag image, :size=>"100x100" %> <br>
+    <% end %>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-default form-control' %>
+  </div>
+<% end %>
+
+<% if @surplus_land.persisted? %>
+  <h3>公開所有地を削除する</h3>
+  <%= button_to '削除', surplus_land_path(@surplus_land),
+    data: { confirm: '公開所有地を削除しますか？' },
+    method: :delete,
+    class: 'btn btn-default form-control' %>
+<% end %>

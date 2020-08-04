@@ -10,6 +10,8 @@ RSpec.describe User, type: :model do
 
     it { should validate_presence_of(:email) }
 
+    it { should validate_length_of(:profile).is_at_most(400) }
+
     it 'email validation should accept valid addresses' do
       valid_addresses = %w[
         user@example.com
@@ -52,6 +54,19 @@ RSpec.describe User, type: :model do
       user.email = mixed_case_email
       user.save
       expect(user.reload.email).to eq mixed_case_email.downcase
+    end
+  end
+
+  describe 'association' do
+    it { should have_many :surplus_lands }
+
+    describe 'dependent destroy' do
+      let!(:user) { create(:user) }
+      let!(:surplus_land) { create(:surplus_land, user: user) }
+
+      it 'destroys dependent surplus_lands' do
+        expect { user.destroy }.to change(SurplusLand, :count).by(-1)
+      end
     end
   end
 end

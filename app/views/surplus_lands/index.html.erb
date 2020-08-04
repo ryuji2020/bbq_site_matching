@@ -1,2 +1,16 @@
 <h1>SurplusLands#index</h1>
 <p>Find me in app/views/surplus_lands/index.html.erb</p>
+<div class="row">
+  <% @surplus_lands.each do |surplus_land| %>
+    <div class="col-md-4">
+      <p><%= surplus_land.title %></p>
+      <p><%= surplus_land.price %></p>
+      <p><%= surplus_land.state %></p>
+      <p><%= surplus_land.address %></p>
+      <p><%= surplus_land.description %></p>
+      <%= link_to edit_surplus_land_path(surplus_land) do %>
+        <p><%= image_tag surplus_land.images.first.variant(resize: '200x200') %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
