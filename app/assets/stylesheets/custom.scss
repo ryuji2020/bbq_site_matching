@@ -1,17 +1,46 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/*============================== common =====================================*/
+a {
+  color: #777;
+  &:hover {
+    color: #555
+  }
+}
 /*============================== spacing ====================================*/
 .mt50 {
   margin-top: 50px;
 }
 
+.mt100 {
+  margin-top: 100px;
+}
+
 .mb50 {
   margin-bottom: 50px;
 }
-/*================================ form =====================================*/
-.devise-link {
-  a {
-    color: #777;
+/*================================ top page ==================================*/
+.top-image {
+  background-image: url("/images/top-image.jpg");
+  background-position: center;
+  margin: 0 calc(50% - 50vw);
+  width: 100vw;
+  height: 400px;
+  position: relative;
+  .top-sentence {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    p {
+      color: white;
+      opacity: .9;
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+    }
   }
 }
