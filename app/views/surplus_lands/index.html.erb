@@ -8,8 +8,10 @@
       <p><%= surplus_land.state %></p>
       <p><%= surplus_land.address %></p>
       <p><%= surplus_land.description %></p>
-      <%= link_to edit_surplus_land_path(surplus_land) do %>
-        <p><%= image_tag surplus_land.images.first.variant(resize: '200x200') %></p>
+      <% if surplus_land.images.any? %>
+        <%= link_to edit_surplus_land_path(surplus_land) do %>
+          <p><%= image_tag surplus_land.images.first.variant(resize: '200x200') %></p>
+        <% end %>
       <% end %>
     </div>
   <% end %>
