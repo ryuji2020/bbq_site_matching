@@ -12,4 +12,15 @@ class SurplusLand < ApplicationRecord
     size_range: 1..5.megabytes
   }
   attr_accessor :image_ids
+
+  # resize images
+  def square_thumb
+    self.images.first.variant(
+      combine_options: {
+        gravity: :center,
+        resize:"230x230^",
+        crop:"230x230+0+0"
+      }
+    ).processed
+  end
 end

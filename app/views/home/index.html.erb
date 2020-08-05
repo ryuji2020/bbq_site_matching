@@ -6,5 +6,37 @@
     <p>Mad Outdoor へようこそ</p>
   </div>
 </div>
-
-<%= link_to '一覧', surplus_lands_path %>
+<section class="introduction py50">
+  <div class="introduction-text text-center mb50">
+    <p>このサイトは、どうしてもキャンプやBBQがしたい人と</p>
+    <p>山や農地など、土地はあるけど用途があまりない人</p>
+    <p>どちらの願いも叶えてしまう</p>
+    <p>夢のようなマッチングサイトです！</p>
+  </div>
+  <div class="introduction-link row">
+    <div class="col-sm-6 link-text">
+      <h2>キャンプ地＆BBQ地一覧</h2>
+      <h3>キャンプ地が続々と公開されています！</h3>
+      <p><%= link_to '一覧から探す', surplus_lands_path %></p>
+    </div>
+    <div class="col-sm-6 link-image"></div>
+  </div>
+  <div class="recent-land">
+    <h3 class="py50">最近追加されたキャンプ地</h4>
+    <div class="row">
+      <% @surplus_lands.each do |surplus_land| %>
+        <%= link_to '#' do %>
+          <div class="col-md-3 col-sm-6">
+            <div class="recent-land-image">
+              <%= image_tag surplus_land.square_thumb %>
+            </div>
+            <div class="recent-land-info">
+              <p><%= surplus_land.title %></p>
+              <p><%= surplus_land.price %> 円</p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
