@@ -5,7 +5,7 @@ class SurplusLandsController < ApplicationController
   before_action :get_region_prefectures, only: [:index, :refine_search]
 
   def index
-    @surplus_lands = SurplusLand.all
+    @surplus_lands = SurplusLand.page(params[:page])
     @page_title = '貸し出し中のキャンプ地＆BBQ場'
   end
 
@@ -54,7 +54,7 @@ class SurplusLandsController < ApplicationController
 
   def refine_search
     @prefecture_name = params[:id]
-    @surplus_lands = SurplusLand.where(state: @prefecture_name)
+    @surplus_lands = SurplusLand.where(state: @prefecture_name).page(params[:page])
     @page_title = "#{@prefecture_name}のキャンプ地＆BBQ場"
     render 'index'
   end

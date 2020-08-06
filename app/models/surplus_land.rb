@@ -12,6 +12,7 @@ class SurplusLand < ApplicationRecord
     size_range: 1..5.megabytes
   }
   attr_accessor :image_ids
+  paginates_per 12
 
   # resize images
   def square_thumb

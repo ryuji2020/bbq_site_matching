@@ -24,19 +24,7 @@
   <div class="recent-land">
     <h3 class="py50">最近追加されたキャンプ地</h4>
     <div class="row">
-      <% @surplus_lands.each do |surplus_land| %>
-        <%= link_to '#' do %>
-          <div class="col-md-3 col-sm-6">
-            <div class="recent-land-image">
-              <%= image_tag surplus_land.square_thumb %>
-            </div>
-            <div class="recent-land-info">
-              <p><%= surplus_land.title %></p>
-              <p><%= surplus_land.price %> 円</p>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+      <%= render @surplus_lands, md: 3 %>
     </div>
   </div>
 </section>

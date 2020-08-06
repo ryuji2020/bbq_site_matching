@@ -1,0 +1,11 @@
+<div class="col-sm-6 <%= 'col-md-4' if md == 4 %> <%= 'col-md-3' if md == 3 %>">
+  <%= link_to edit_surplus_land_path(surplus_land) do %>
+    <div class="surplus_land-image">
+      <p><%= image_tag surplus_land.square_thumb if surplus_land.images.any? %></p>
+    </div>
+    <div class="surplus_land-info">
+      <p><%= surplus_land.title %></p>
+      <p><%= "#{surplus_land.state} / #{surplus_land.price} 円" %></p>
+    </div>
+  <% end %>
+</div>

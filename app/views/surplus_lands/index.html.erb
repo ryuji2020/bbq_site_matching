@@ -124,20 +124,8 @@
       <h4 class="mt50"><%= "#{@prefecture_name}のキャンプ地はまだ登録されていません" %></h4>
     <% end %>
     <div class="row">
-      <% @surplus_lands.each do |surplus_land| %>
-        <div class="col-sm-6 col-md-4">
-          <p><%= surplus_land.title %></p>
-          <p><%= surplus_land.price %></p>
-          <p><%= surplus_land.state %></p>
-          <p><%= surplus_land.address %></p>
-          <p><%= surplus_land.description %></p>
-          <% if surplus_land.images.any? %>
-            <%= link_to edit_surplus_land_path(surplus_land) do %>
-              <p><%= image_tag surplus_land.square_thumb %></p>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render @surplus_lands, md: 4 %>
     </div>
+    <%= paginate @surplus_lands %>
   </div>
 </div>
