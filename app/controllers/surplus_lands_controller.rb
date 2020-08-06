@@ -2,9 +2,11 @@ class SurplusLandsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_prefecture_array, only: [:new, :create, :edit, :update]
+  before_action :get_region_prefectures, only: [:index, :refine_search]
 
   def index
     @surplus_lands = SurplusLand.all
+    @page_title = '貸し出し中のキャンプ地＆BBQ場'
   end
 
   def show
@@ -50,6 +52,13 @@ class SurplusLandsController < ApplicationController
     redirect_to root_url
   end
 
+  def refine_search
+    @prefecture_name = params[:id]
+    @surplus_lands = SurplusLand.where(state: @prefecture_name)
+    @page_title = "#{@prefecture_name}のキャンプ地＆BBQ場"
+    render 'index'
+  end
+
   private
 
   def surplus_land_params
@@ -83,5 +92,16 @@ class SurplusLandsController < ApplicationController
   # 都道府県セレクトボックス用の配列を作成
   def set_prefecture_array
     @prefectures = Prefecture.selectbox
+  end
+
+  # サイドバー用の地方ごとの都道府県名配列を作成
+  def get_region_prefectures
+    @tohoku_hokkaido_prefectures = Prefecture.get_tohoku_hokkaido
+    @kanto_prefectures = Prefecture.get_kanto
+    @chubu_prefectures = Prefecture.get_chubu
+    @kinki_prefectures = Prefecture.get_kinki
+    @chugoku_prefectures = Prefecture.get_chugoku
+    @shikoku_prefectures = Prefecture.get_shikoku
+    @okinawa_kyushu_prefectures = Prefecture.get_okinawa_kyushu
   end
 end

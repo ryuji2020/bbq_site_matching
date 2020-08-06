@@ -39,6 +39,17 @@ ul, ol {
 .py50 {
   padding: 50px 0;
 }
+/*================================ page_title ================================*/
+.page-title {
+  @include ignore-container;
+  height: 120px;
+  background-color: $site-color;
+  h3 {
+    color: #fff;
+    line-height: 120px;
+    margin-top: 0;
+  }
+}
 /*================================ top page ==================================*/
 .top-image {
   @include ignore-container;

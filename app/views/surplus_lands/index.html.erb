@@ -1,16 +1,143 @@
+<% provide(:title, 'All Land') %>
+
+<%= render 'shared/page_title', page_title: @page_title %>
+
 <div class="row">
-  <% @surplus_lands.each do |surplus_land| %>
-    <div class="col-md-4">
-      <p><%= surplus_land.title %></p>
-      <p><%= surplus_land.price %></p>
-      <p><%= surplus_land.state %></p>
-      <p><%= surplus_land.address %></p>
-      <p><%= surplus_land.description %></p>
-      <% if surplus_land.images.any? %>
-        <%= link_to edit_surplus_land_path(surplus_land) do %>
-          <p><%= image_tag surplus_land.images.first.variant(resize: '200x200') %></p>
+  <!-- sidebar -->
+  <div class="col-sm-3 panel-group" id="prefectureAccordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="#prefectureAccordionCollapse1" data-toggle="collapse" data-parent="#prefectureAccordion">
+            北海道・東北
+          </a>
+        </h3>
+      </div>
+      <div class="panel-collapse collapse" id="prefectureAccordionCollapse1">
+        <% @tohoku_hokkaido_prefectures.each do |prefecture| %>
+          <div class="panel-body">
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+          </div>
         <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="#prefectureAccordionCollapse2" data-toggle="collapse" data-parent="#prefectureAccordion">
+            関東
+          </a>
+        </h3>
+      </div>
+      <div class="panel-collapse collapse" id="prefectureAccordionCollapse2">
+        <% @kanto_prefectures.each do |prefecture| %>
+          <div class="panel-body">
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="#prefectureAccordionCollapse3" data-toggle="collapse" data-parent="#prefectureAccordion">
+            中部
+          </a>
+        </h3>
+      </div>
+      <div class="panel-collapse collapse" id="prefectureAccordionCollapse3">
+        <% @chubu_prefectures.each do |prefecture| %>
+          <div class="panel-body">
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="#prefectureAccordionCollapse4" data-toggle="collapse" data-parent="#prefectureAccordion">
+            近畿
+          </a>
+        </h3>
+      </div>
+      <div class="panel-collapse collapse" id="prefectureAccordionCollapse4">
+        <% @kinki_prefectures.each do |prefecture| %>
+          <div class="panel-body">
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="#prefectureAccordionCollapse5" data-toggle="collapse" data-parent="#prefectureAccordion">
+            中国
+          </a>
+        </h3>
+      </div>
+      <div class="panel-collapse collapse" id="prefectureAccordionCollapse5">
+        <% @chugoku_prefectures.each do |prefecture| %>
+          <div class="panel-body">
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="#prefectureAccordionCollapse6" data-toggle="collapse" data-parent="#prefectureAccordion">
+            四国
+          </a>
+        </h3>
+      </div>
+      <div class="panel-collapse collapse" id="prefectureAccordionCollapse6">
+        <% @shikoku_prefectures.each do |prefecture| %>
+          <div class="panel-body">
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="#prefectureAccordionCollapse7" data-toggle="collapse" data-parent="#prefectureAccordion">
+            九州・沖縄
+          </a>
+        </h3>
+      </div>
+      <div class="panel-collapse collapse" id="prefectureAccordionCollapse7">
+        <% @okinawa_kyushu_prefectures.each do |prefecture| %>
+          <div class="panel-body">
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- surplus_lands item -->
+  <div class="col-sm-9">
+    <% if @surplus_lands.empty? %>
+      <h4 class="mt50"><%= "#{@prefecture_name}のキャンプ地はまだ登録されていません" %></h4>
+    <% end %>
+    <div class="row">
+      <% @surplus_lands.each do |surplus_land| %>
+        <div class="col-sm-6 col-md-4">
+          <p><%= surplus_land.title %></p>
+          <p><%= surplus_land.price %></p>
+          <p><%= surplus_land.state %></p>
+          <p><%= surplus_land.address %></p>
+          <p><%= surplus_land.description %></p>
+          <% if surplus_land.images.any? %>
+            <%= link_to edit_surplus_land_path(surplus_land) do %>
+              <p><%= image_tag surplus_land.square_thumb %></p>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
