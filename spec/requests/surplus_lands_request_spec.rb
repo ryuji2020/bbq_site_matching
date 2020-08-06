@@ -5,7 +5,7 @@ RSpec.describe "SurplusLands", type: :request do
 
   describe "GET /index" do
     it "returns http success" do
-      get root_path
+      get surplus_lands_path
       expect(response).to have_http_status(:success)
     end
   end
@@ -71,13 +71,13 @@ RSpec.describe "SurplusLands", type: :request do
         expect do
           post surplus_lands_path, params: params
         end.to change(SurplusLand, :count).by(1)
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to surplus_land_path(SurplusLand.last)
       end
     end
   end
 
   describe 'GET /edit' do
-    let(:surplus_land) { create(:surplus_land, user: user) }
+    let(:surplus_land) { create(:surplus_land, :with_prefecture, user: user) }
 
     context 'when not correct-user' do
       let(:other_user) { create(:user) }
@@ -101,7 +101,7 @@ RSpec.describe "SurplusLands", type: :request do
   end
 
   describe 'PATCH /update' do
-    let(:surplus_land) { create(:surplus_land, title: 'old-title', user: user) }
+    let(:surplus_land) { create(:surplus_land, :with_prefecture, title: 'old-title', user: user) }
 
     before(:each) { sign_in user }
 
@@ -138,13 +138,13 @@ RSpec.describe "SurplusLands", type: :request do
           patch surplus_land_path(surplus_land), params: delete_image
         end.to change { surplus_land.reload.images.size }.from(2).to(0)
         # 正しくリダイレクトされる
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to surplus_land_path(surplus_land)
       end
     end
   end
 
   describe 'DELETE /destroy' do
-    let!(:surplus_land) { create(:surplus_land, user: user) }
+    let!(:surplus_land) { create(:surplus_land, :with_prefecture, user: user) }
 
     context 'when not correct-user' do
       let(:other_user) { create(:user) }

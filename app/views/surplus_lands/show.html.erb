@@ -1,1 +1,3 @@
-<%= link_to 'edit', edit_surplus_land_path(@surplus_land) %>
+<% if current_user?(@surplus_land.user) %>
+  <%= link_to '編集する', edit_surplus_land_path(@surplus_land) %>
+<% end %>

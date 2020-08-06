@@ -17,11 +17,11 @@ class SurplusLand < ApplicationRecord
 
   # resize images
   def square_thumb
-    self.images.first.variant(
+    images.first.variant(
       combine_options: {
         gravity: :center,
-        resize:"230x230^",
-        crop:"230x230+0+0"
+        resize: "230x230^",
+        crop: "230x230+0+0"
       }
     ).processed
   end

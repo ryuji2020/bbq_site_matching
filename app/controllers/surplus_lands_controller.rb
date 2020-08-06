@@ -1,4 +1,5 @@
 class SurplusLandsController < ApplicationController
+  include ApplicationHelper
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_prefecture_array, only: [:new, :create, :edit, :update]
@@ -21,7 +22,7 @@ class SurplusLandsController < ApplicationController
     @surplus_land = current_user.surplus_lands.build(surplus_land_params)
     if @surplus_land.save
       flash[:success] = '所有地を公開しました！'
-      redirect_to root_path # 後で @surplus_land に変える
+      redirect_to @surplus_land
     else
       render 'new'
     end
@@ -39,7 +40,7 @@ class SurplusLandsController < ApplicationController
         end
       end
       flash[:success] = '公開所有地情報が変更されました'
-      redirect_to root_path # 後で変更
+      redirect_to @surplus_land
     else
       @surplus_land.reload
       @surplus_land.attributes = surplus_land_params_without_images
@@ -87,7 +88,7 @@ class SurplusLandsController < ApplicationController
 
   def correct_user
     @surplus_land = SurplusLand.find(params[:id])
-    redirect_to root_url unless current_user == @surplus_land.user
+    redirect_to root_url unless current_user?(@surplus_land.user)
   end
 
   # 都道府県セレクトボックス用の配列を作成
