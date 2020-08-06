@@ -10,6 +10,7 @@ class SurplusLandsController < ApplicationController
   end
 
   def show
+    @surplus_land = SurplusLand.find(params[:id])
   end
 
   def new
