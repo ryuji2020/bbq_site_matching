@@ -20,7 +20,7 @@ RSpec.describe SurplusLand, type: :model do
 
     describe 'active-storatge validation' do
       context 'when image-file size < 5MB' do
-        let(:surplus_land) { build(:surplus_land, :with_user) }
+        let(:surplus_land) { build(:surplus_land, :with_prefecture, :with_user) }
 
         it 'be valid' do
           expect(surplus_land).to be_valid
@@ -31,6 +31,7 @@ RSpec.describe SurplusLand, type: :model do
         let(:surplus_land) do
           build(
             :surplus_land,
+            :with_prefecture,
             :with_user,
             images: [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/oversize.jpg'), 'image/jpg')]
           )
@@ -47,7 +48,7 @@ RSpec.describe SurplusLand, type: :model do
     it { should belong_to :user }
 
     describe 'references prefecture' do
-      let(:surplus_land) { create(:surplus_land, :with_user) }
+      let(:surplus_land) { create(:surplus_land, :with_prefecture, :with_user) }
 
       it 'state could save only valid value' do
         expect(surplus_land.state).to eq '東京都'

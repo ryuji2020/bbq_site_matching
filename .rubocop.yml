@@ -8,6 +8,9 @@ Metrics/LineLength:
 Airbnb/OptArgParameters:
   Enabled: false
 
+Airbnb/DefaultScope:
+  Enabled: false
+
 Style/PercentLiteralDelimiters:
   Enabled: false
 

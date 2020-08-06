@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
 
     describe 'dependent destroy' do
       let!(:user) { create(:user) }
-      let!(:surplus_land) { create(:surplus_land, user: user) }
+      let!(:surplus_land) { create(:surplus_land, :with_prefecture, user: user) }
 
       it 'destroys dependent surplus_lands' do
         expect { user.destroy }.to change(SurplusLand, :count).by(-1)

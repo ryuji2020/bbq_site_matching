@@ -1,5 +1,6 @@
 <% provide(:title, 'Sign up') %>
-<h2 class="text-center">ユーザー登録</h2>
+
+<%= render 'shared/page_title', page_title: 'ユーザー登録' %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
@@ -32,6 +33,4 @@
   </div>
 <% end %>
 
-<div class="devise-link">
-  <%= render "users/shared/links" %>
-</div>
+<%= render "users/shared/links" %>
