@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @surplus_lands = SurplusLand.order(:created_at).limit(4)
+    @surplus_lands = SurplusLand.limit(4)
   end
 end
