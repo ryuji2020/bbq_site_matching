@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :like do
-    surplus_lands { nil }
+    surplus_land { nil }
     user { nil }
   end
 end
