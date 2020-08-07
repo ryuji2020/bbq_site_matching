@@ -1,3 +1,4 @@
 <% if current_user?(@surplus_land.user) %>
   <%= link_to '編集する', edit_surplus_land_path(@surplus_land) %>
 <% end %>
+<%= link_to @surplus_land.user.name, @surplus_land.user %>
