@@ -1,0 +1,7 @@
+<div class="like_form d-inline">
+  <% if current_user.like?(surplus_land) %>
+    <%= render 'likes/unlike', surplus_land: surplus_land %>
+  <% else %>
+    <%= render 'likes/like', surplus_land: surplus_land %>
+  <% end %>
+</div>

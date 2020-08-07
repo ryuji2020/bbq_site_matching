@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     member do
       get :refine_search
     end
+    resources :likes, only: [:create, :destroy]
   end
 end

@@ -1,0 +1,4 @@
+<% like = surplus_land.likes.find_by(user_id: current_user.id) %>
+<%= link_to surplus_land_like_path(surplus_land, like), method: :delete, remote: true do %>
+  <span class="glyphicon glyphicon-star orange" aria-hidden="true"></span>
+<% end %>
