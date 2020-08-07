@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe "SurplusLands", type: :request do
   let(:user) { create(:user) }
 
-  describe "GET /index" do
+  describe "GET /surplus_lands" do
     it "returns http success" do
       get surplus_lands_path
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe 'GET /new' do
+  describe 'GET /surplus_lands/new' do
     context 'when user not sign in' do
       it 'redirect and request sign in' do
         get new_surplus_land_path(user)
@@ -27,7 +27,7 @@ RSpec.describe "SurplusLands", type: :request do
     end
   end
 
-  describe 'POST /create' do
+  describe 'POST /surplus_lands' do
     before(:each) do
       sign_in user
       create(:prefecture)
@@ -76,7 +76,7 @@ RSpec.describe "SurplusLands", type: :request do
     end
   end
 
-  describe 'GET /edit' do
+  describe 'GET /surplus_lands/:id/edit' do
     let(:surplus_land) { create(:surplus_land, :with_prefecture, user: user) }
 
     context 'when not correct-user' do
@@ -100,7 +100,7 @@ RSpec.describe "SurplusLands", type: :request do
     end
   end
 
-  describe 'PATCH /update' do
+  describe 'PATCH /surplus_lands/:id' do
     let(:surplus_land) { create(:surplus_land, :with_prefecture, title: 'old-title', user: user) }
 
     before(:each) { sign_in user }
@@ -143,7 +143,7 @@ RSpec.describe "SurplusLands", type: :request do
     end
   end
 
-  describe 'DELETE /destroy' do
+  describe 'DELETE /surplus_lands/:id' do
     let!(:surplus_land) { create(:surplus_land, :with_prefecture, user: user) }
 
     context 'when not correct-user' do
