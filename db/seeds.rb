@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require './db/seeds/prefecture.rb'
 
+# サンプルユーザーを作成
 User.create!(
   name: 'Example User',
   email: 'example@railstutorial.org',
@@ -15,7 +16,7 @@ User.create!(
   password: 'foobar'
 )
 
-8.times do |n|
+4.times do |n|
   name = Faker::Name.name
   email = "example-#{n}@railstutorial.org"
   gender = '男'
@@ -30,15 +31,15 @@ User.create!(
   )
 end
 
-users = User.order(:created_at).take(5)
-5.times do |n|
-  title = Faker::University.name
-  price = (n + 1) * 100
-  state = ['東京都', '神奈川県', '大阪府', '京都府', '北海道']
-  address = Faker::Address.street_address
-  description = Faker::Lorem.sentence(word_count: 5)
-  images = [File.open("#{Rails.root}/db/fixtures/image#{n}.jpg")]
-  users.each do |user|
+# サンプルSurplus_landを作成
+users = User.all
+users.each do |user|
+  5.times do |n|
+    title = Faker::University.name
+    price = (n + 1) * 100
+    state = ['東京都', '神奈川県', '大阪府', '京都府', '北海道']
+    address = Faker::Address.street_address
+    description = Faker::Lorem.sentence(word_count: 5)
     user.surplus_lands.create!(
       title: title,
       price: price,
@@ -52,4 +53,17 @@ end
 surplus_lands = SurplusLand.all
 surplus_lands.each_with_index do |surplus_land, i|
   surplus_land.images.attach(io: File.open(Rails.root.join("db/fixtures/image#{i}.jpg")), filename: "image#{i}.jpg")
+end
+
+# お気に入り登録
+users[0..2].each do |user|
+  5.times do |n|
+    user.likes.create!(surplus_land_id: n + 1)
+  end
+end
+
+users[3..4].each do |user|
+  5.times do |n|
+    user.likes.create!(surplus_land_id: n + 6)
+  end
 end

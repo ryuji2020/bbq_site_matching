@@ -1,11 +1,16 @@
-<div class="col-sm-6 <%= 'col-md-4' if md == 4 %> <%= 'col-md-3' if md == 3 %>">
+<div class="col-sm-6 <%= 'col-md-4' if md == 4 %> <%= 'col-md-3' if md == 3 %>" id="surplusLand-<%= surplus_land.id %>">
   <%= link_to surplus_land do %>
     <div class="surplus_land-image">
       <p><%= image_tag surplus_land.square_thumb if surplus_land.images.any? %></p>
     </div>
     <div class="surplus_land-info">
       <p><%= surplus_land.title %></p>
-      <p><%= "#{surplus_land.state} / #{surplus_land.price} 円" %></p>
+      <p>
+        <% if user_signed_in? %>
+          <%= render 'likes/like_form', surplus_land: surplus_land  %>
+        <% end %>
+        <%= "#{surplus_land.state} / #{surplus_land.price} 円" %>
+      </p>
     </div>
   <% end %>
 </div>

@@ -2,6 +2,8 @@ class SurplusLand < ApplicationRecord
   has_many_attached :images
   belongs_to :user
   belongs_to :prefecture, foreign_key: 'state', primary_key: 'name'
+  has_many :likes, dependent: :destroy
+  has_many :like_users, through: :likes, source: :user
   default_scope -> { order(created_at: :desc) }
   validates :title, presence: true, length: { maximum: 50 }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
