@@ -1,8 +1,8 @@
-<%= link_to '#' do %>
+<%= link_to following_user_path(user) do %>
   <strong><%= user.active_relationships.count %></strong>
   フォロー中
 <% end %>
-<%= link_to '#' do %>
+<%= link_to followers_user_path(user) do %>
   <strong><%= user.passive_relationships.count %></strong>
   フォロワー
 <% end %>

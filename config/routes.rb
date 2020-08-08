@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get :following, :followers
+    end
+  end
   resources :surplus_lands do
     member do
       get :refine_search

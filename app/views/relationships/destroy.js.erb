@@ -1,2 +1,2 @@
-$('#follow_form').html("<%= escape_javascript(render 'users/follow', user: @user) %>");
-$('#stats').html("<%= escape_javascript(render 'users/stats', user: @user) %>");
+$('#follow_form_<%= @user.id %>').html("<%= escape_javascript(render 'users/follow', user: @user) %>");
+$('#stats_<%= @user.id %>').html("<%= escape_javascript(render 'users/stats', user: @user) %>");
