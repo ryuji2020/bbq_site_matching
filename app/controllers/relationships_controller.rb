@@ -6,10 +6,12 @@ class RelationshipsController < ApplicationController
     unless current_user.following?(@user)
       current_user.follow(@user)
       respond_to do |format|
-        format.html { redirect_to @user }
+        format.html { redirect_to request.referrer || @user }
         format.js
       end
     else
+      @own_surplus_lands = @user.surplus_lands
+      @like_surplus_lands = @user.like_surplus_lands.page(params[:page])
       render 'users/show'
     end
   end
@@ -18,7 +20,7 @@ class RelationshipsController < ApplicationController
     @user = Relationship.find(params[:id]).followed
     current_user.unfollow(@user)
     respond_to do |format|
-      format.html { redirect_to @user }
+      format.html { redirect_to request.referrer || @user }
       format.js
     end
   end
