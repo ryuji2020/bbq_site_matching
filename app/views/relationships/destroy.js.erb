@@ -1,2 +1,6 @@
 $('#follow_form_<%= @user.id %>').html("<%= escape_javascript(render 'users/follow', user: @user) %>");
 $('#stats_<%= @user.id %>').html("<%= escape_javascript(render 'users/stats', user: @user) %>");
+
+<% if @current_user %>
+  $('#stats_<%= @current_user.id %>').html("<%= escape_javascript(render 'users/stats', user: @current_user) %>");
+<% end %>

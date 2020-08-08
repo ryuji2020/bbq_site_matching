@@ -14,7 +14,7 @@ class SurplusLand < ApplicationRecord
     content_type: ['image/png', 'image/jpg', 'image/jpeg'],
     size_range: 1..5.megabytes
   }
-  
+
   default_scope -> { order(created_at: :desc) }
   attr_accessor :image_ids
   paginates_per 12
