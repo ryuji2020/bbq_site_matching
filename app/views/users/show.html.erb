@@ -1,3 +1,7 @@
+<% provide(:title, @user.name) %>
+
+<%= render 'shared/page_title', page_title: 'プロフィール' %>
+
 <div class="row">
   <div class="col-md-4"> <!-- profile -->
     <div class="row">
@@ -14,21 +18,14 @@
       <p><%= @user.profile %></p>
     </div>
     <div class="row"> <!-- follow form -->
-      <div class="col-xs-8"> <!-- follow&follower -->
-        <%= link_to '#' do %>
-          <strong>10</strong>
-          フォロー中
-        <% end %>
-        <%= link_to '#' do %>
-          <strong>8</strong>
-          フォロワー
-        <% end %>
+      <div class="col-xs-8" id="stats"> <!-- follow&follower -->
+        <%= render 'stats', user: @user %>
       </div>
       <div class="col-xs-4"> <!-- follo button or edit-link -->
         <% if current_user?(@user) %>
           <%= link_to '編集する', edit_user_registration_path %>
         <% else %>
-          <button class="btn btn-default">フォローする</button>
+          <%= render 'follow_form', user: @user %>
         <% end %>
       </div>
     </div>

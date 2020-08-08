@@ -31,4 +31,19 @@ class User < ApplicationRecord
   def like?(surplus_land)
     like_surplus_lands.include?(surplus_land)
   end
+
+  # other_userをフォローする
+  def follow(other_user)
+    following << other_user
+  end
+
+  # other_userをフォローをしていれはtrueを返す
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  # other_userのフォローを解除する
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
 end

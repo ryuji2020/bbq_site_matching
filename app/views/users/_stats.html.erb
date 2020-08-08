@@ -1,0 +1,8 @@
+<%= link_to '#' do %>
+  <strong><%= user.active_relationships.count %></strong>
+  フォロー中
+<% end %>
+<%= link_to '#' do %>
+  <strong><%= user.passive_relationships.count %></strong>
+  フォロワー
+<% end %>
