@@ -19,13 +19,13 @@
     </div>
     <div class="row"> <!-- follow form -->
       <div class="col-xs-8" id="stats"> <!-- follow&follower -->
-        <%= render 'stats', user: @user %>
+        <%= render 'users/stats', user: @user %>
       </div>
       <div class="col-xs-4"> <!-- follo button or edit-link -->
         <% if current_user?(@user) %>
           <%= link_to '編集する', edit_user_registration_path %>
         <% else %>
-          <%= render 'follow_form', user: @user %>
+          <%= render 'users/follow_form', user: @user %>
         <% end %>
       </div>
     </div>
