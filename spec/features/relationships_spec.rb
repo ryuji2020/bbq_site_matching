@@ -39,7 +39,7 @@ RSpec.feature "Relationships", type: :feature do
       expect(page).to have_no_button 'フォロー中'
       expect(page).to have_button 'フォローする'
       expect(page).to have_link '0 フォロワー', href: followers_user_path(other_user)
-      ecpect(Relationship.count).to eq 1
+      expect(Relationship.count).to eq 1
     end
   end
 end
