@@ -7,14 +7,14 @@ RSpec.describe Comment, type: :model do
     it { should validate_presence_of :surplus_land_id }
 
     it { should validate_presence_of :body }
-    
+
     it { should validate_length_of(:body).is_at_most(400) }
   end
 
   describe 'association' do
     let(:surplus_land_user) { create(:user) }
     let(:comment_user) { create(:user) }
-    let(:surplus_land) { create(:surplus_land, state: '東京都', user: surplud_land_user) }
+    let(:surplus_land) { create(:surplus_land, state: '東京都', user: surplus_land_user) }
 
     before(:each) do
       create(:prefecture)
