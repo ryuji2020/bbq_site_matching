@@ -53,6 +53,11 @@
   </div>
 <% end %>
 
+<div class="gravatar_edit">
+  <%= gravatar_for(@user, size: 60) %>
+  <a href="http://gravatar.com/emails" target="_blank">change</a>
+</div>
+
 <h3>アカウントを削除する</h3>
 
 <p>本当によろしいですか？ <%= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-default form-control' %></p>

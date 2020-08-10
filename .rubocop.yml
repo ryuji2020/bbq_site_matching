@@ -23,10 +23,16 @@ Style/BlockDelimiters:
 Style/TrailingCommaInHashLiteral:
   Enabled: false
 
+Style/ColonMethodCall:
+  Enabled: false
+
 Layout/BlockEndNewline:
   Enabled: false
 
 Layout/MultilineBlockLayout:
+  Enabled: false
+
+Layout/AlignArguments:
   Enabled: false
 
 Lint/AssignmentInCondition:

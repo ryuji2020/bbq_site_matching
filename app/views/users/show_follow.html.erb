@@ -1,0 +1,13 @@
+<% provide(:title, @title) %>
+
+<%= render 'shared/page_title', page_title: @page_title %>
+
+<div class="row">
+  <div class="col-md-4"> <!-- profile -->
+    <%= render 'profile', user: @user %>
+  </div>
+  <div class="col-md-8 follow-user"> <!-- follow or follower -->
+    <%= render @relationship_users %>
+    <%= paginate @relationship_users %>
+  </div>
+</div>

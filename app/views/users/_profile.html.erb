@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-xs-3"> <!-- gravatar -->
+    <%= gravatar_for(user, size: 70) %>
+  </div>
+  <div class="col-xs-9"> <!-- name,gender -->
+    <p>名前：<%= user.name %></p>
+    <p>性別：<%= user.gender %></p>
+  </div>
+</div>
+<div class=""> <!-- self introduction -->
+  <h4 class="">自己紹介</h4>
+  <p><%= user.profile %></p>
+</div>
+<div class="row"> <!-- follow form -->
+  <div class="col-xs-8" id="stats_<%= user.id %>"> <!-- follow&follower -->
+    <%= render 'users/stats', user: user %>
+  </div>
+  <div class="col-xs-4"> <!-- follo button or edit-link -->
+    <%= render 'users/follow_form', user: user %>
+  </div>
+</div>
