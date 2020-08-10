@@ -6,7 +6,7 @@
   <div class="col-md-4"> <!-- profile -->
     <%= render 'profile', user: @user %>
   </div>
-  <div class="col-md-8"> <!-- follow or follower -->
+  <div class="col-md-8 follow-user"> <!-- follow or follower -->
     <%= render @relationship_users %>
     <%= paginate @relationship_users %>
   </div>

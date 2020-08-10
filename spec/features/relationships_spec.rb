@@ -44,7 +44,7 @@ RSpec.feature "Relationships", type: :feature do
     end
   end
 
-  feature 'get /users/:id/following(followers)', js:true do
+  feature 'get /users/:id/following(followers)', js: true do
     given(:third_user) { create(:user) }
 
     background do
@@ -87,16 +87,20 @@ RSpec.feature "Relationships", type: :feature do
       click_link third_user.name, match: :first
       expect(current_path).to eq user_path(third_user)
       click_link '2 フォロー中'
-      expect(page).to have_no_button 'フォロー中'
-      expect(page).to have_button 'フォローする'
+      within '.follow-user' do
+        expect(page).to have_no_button 'フォロー中'
+        expect(page).to have_button 'フォローする'
+      end
       expect(page).to have_link '編集する'
       expect(page).to have_link '2 フォロー中'
       expect(page).to have_link '2 フォロワー'
       within "#follow_form_#{other_user.id}" do
         click_button 'フォローする'
       end
-      expect(page).to have_button 'フォロー中'
-      expect(page).to have_no_button 'フォローする'
+      within '.follow-user' do
+        expect(page).to have_button 'フォロー中'
+        expect(page).to have_no_button 'フォローする'
+      end
       expect(page).to have_link '2 フォロー中'
       expect(page).to have_link '2 フォロワー'
       expect(Relationship.count).to eq 6
