@@ -1,4 +1,26 @@
-<% if current_user?(@surplus_land.user) %>
-  <%= link_to '編集する', edit_surplus_land_path(@surplus_land) %>
-<% end %>
-<%= link_to @surplus_land.user.name, @surplus_land.user %>
+<% provide(:title, @surplus_land.title) %>
+
+<%= render 'shared/page_title', page_title: @surplus_land.title %>
+
+<div class="row">
+  <div class="col-md-6"> <!-- image -->
+    <ul class="slider-for">
+      <% @surplus_land.images.each do |image| %>
+        <li class="image-box"><%= image_tag image, class: 'image' %></li>
+      <% end %>
+    </ul>
+    <ul class="slider-nav">
+      <% @surplus_land.images.each do |image| %>
+        <li class="thumb-list"><%= image_tag image, class: 'image' %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-6"> <!-- description -->
+    <%= link_to @surplus_land.user.name, @surplus_land.user %>
+    <%= link_to '編集する', edit_surplus_land_path(@surplus_land) if current_user?(@surplus_land.user) %>
+  </div>
+</div>
+
+<div class=""> <!-- google map api -->
+
+</div>

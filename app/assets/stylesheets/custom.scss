@@ -113,6 +113,22 @@ ul, ol {
 .recent-land h3 {
   border-bottom: 5px solid #ccc;
 }
+/*============================ surplu_land show page =========================*/
+/*------------------------------- slide image --------------------------------*/
+.image-box {
+  .image {
+    width: 100%;
+  }
+}
+
+.thumb-list {
+  .image {
+    height: 100px;
+    @media (min-width: 992px) {
+      height: 70px;
+    }
+  }
+}
 /*============================== footer ======================================*/
 footer {
   @include ignore-container;
