@@ -67,3 +67,16 @@ users[3..4].each do |user|
     user.likes.create!(surplus_land_id: n + 6)
   end
 end
+
+# サンプルフォロー
+users = User.all
+user = users.first
+second_user = users.second
+following = users[1..3]
+followers = users[1..4]
+second_following = users[2..4]
+second_followers = users[2..4]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
+second_following.each { |followed| second_user.follow(followed) }
+second_followers.each { |follower| follower.follow(second_user) }
