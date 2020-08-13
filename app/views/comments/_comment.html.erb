@@ -4,6 +4,6 @@
   </div>
   <div class="col-xs-10">
     <p><%= link_to comment.user.name, comment.user %></p>
-    <p><%= comment.body %> <%= link_to '削除', surplus_land_comment_path(surplus_land, comment), method: :delete, data: { confirm: '削除しますか？' } if current_user?(comment.user) %></p>
+    <p><%= comment.body %> <%= link_to '削除', surplus_land_comment_path(surplus_land, comment), method: :delete, data: { confirm: '削除しますか？' }, remote: true if current_user?(comment.user) %></p>
   </div>
 </div>

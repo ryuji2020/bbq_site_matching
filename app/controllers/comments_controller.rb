@@ -7,29 +7,32 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     @comment.surplus_land_id = @surplus_land.id
     if @comment.save
-      @comments = @surplus_land.comments.page(params[:page])
       @message = 'コメントを投稿しました'
       respond_to do |format|
         format.html do
           flash[:success] = @message
           redirect_to @surplus_land
         end
-        format.js
+        format.js { @comments = @surplus_land.comments.page(params[:page]) } #pagenationにするか？未定
       end
     else
-      @comments = @surplus_land.comments.page(params[:page])
       respond_to do |format|
         format.html { render 'surplus_lands/show' }
-        format.js
+        format.js { @comments = @surplus_land.comments.page(params[:page]) } #pagenationにするか？未定
       end
     end
   end
 
   def destroy
-    surplus_land = SurplusLand.find(params[:surplus_land_id])
+    @surplus_land = SurplusLand.find(params[:surplus_land_id])
     @comment.destroy
-    flash[:success] = 'コメントを削除しました'
-    redirect_to surplus_land
+    respond_to do |format|
+      format.html do
+        flash[:success] = 'コメントを削除しました'
+        redirect_to @surplus_land
+      end
+      format.js { @comments = @surplus_land.comments.page(params[:page]) } #pagenationにするか？未定
+    end
   end
 
   private

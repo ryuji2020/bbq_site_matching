@@ -11,7 +11,7 @@ class SurplusLandsController < ApplicationController
 
   def show
     @surplus_land = SurplusLand.find(params[:id])
-    @comments = @surplus_land.comments.page(params[:page])
+    @comments = @surplus_land.comments.page(params[:page]) #pagenationにするか？未定
     @comment = @surplus_land.comments.build
   end
 
