@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       get :refine_search
     end
     resources :likes, only: [:create, :destroy]
-    resources :comments, only: [:new, :create, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]
 end
