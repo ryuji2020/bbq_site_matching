@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include AjaxHelper
+  before_action :ajax_authenticate_user
   before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
 
@@ -43,8 +45,21 @@ class CommentsController < ApplicationController
 
   # before_action
 
+  def ajax_authenticate_user
+    unless user_signed_in?
+      respond_to do |format|
+        format.js { render ajax_redirect_to(new_user_session_path) }
+      end
+    end
+  end
+
   def correct_user
     @comment = Comment.find(params[:id])
-    redirect_to root_url unless current_user?(@comment.user)
+    unless current_user?(@comment.user)
+      respond_to do |format|
+        format.html { redirect_to root_url }
+        format.js { render ajax_redirect_to(root_url) }
+      end
+    end
   end
 end
