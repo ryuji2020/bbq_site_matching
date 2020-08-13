@@ -23,6 +23,10 @@ p {
 ul, ol {
   list-style: none;
 }
+
+.alert {
+  @include ignore-container;
+}
 /*------------------------------- spacing ------------------------------------*/
 .mt50 {
   margin-top: 50px;

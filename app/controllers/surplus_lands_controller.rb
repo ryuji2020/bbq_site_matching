@@ -11,6 +11,8 @@ class SurplusLandsController < ApplicationController
 
   def show
     @surplus_land = SurplusLand.find(params[:id])
+    @comments = @surplus_land.comments.page(params[:page])
+    @comment = @surplus_land.comments.build
   end
 
   def new
