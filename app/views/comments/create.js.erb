@@ -1,0 +1,7 @@
+$('#surplus_land_comments').html("<%= j render @comments, surplus_land: @surplus_land %>");
+<% if @message %>
+  $('#comment_body').val('');
+  $('#error_messages').remove();
+<% else %>
+  $('#error_messages').html('<div class="red">400字以内でコメントを入力してください</div>')
+<% end %>
