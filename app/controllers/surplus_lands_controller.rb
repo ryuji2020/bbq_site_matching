@@ -5,12 +5,12 @@ class SurplusLandsController < ApplicationController
   before_action :get_region_prefectures, only: [:index, :refine_search]
 
   def index
-    @surplus_lands = SurplusLand.includes(:images_attachments).page(params[:page])
+    @surplus_lands = SurplusLand.includes(images_attachments: :blob).page(params[:page])
     @page_title = '貸し出し中のキャンプ地＆BBQ場'
   end
 
   def show
-    @surplus_land = SurplusLand.find(params[:id])
+    @surplus_land = SurplusLand.includes(images_attachments: :blob).find(params[:id])
     @comments = @surplus_land.comments.includes(:user).page(params[:page]) # pagenationにするか？未定
     @comment = @surplus_land.comments.build
   end
@@ -57,7 +57,7 @@ class SurplusLandsController < ApplicationController
 
   def refine_search
     @prefecture_name = params[:id]
-    @surplus_lands = SurplusLand.where(state: @prefecture_name).page(params[:page])
+    @surplus_lands = SurplusLand.where(state: @prefecture_name).includes(images_attachments: :blob).page(params[:page])
     @page_title = "#{@prefecture_name}のキャンプ地＆BBQ場"
     render 'index'
   end
