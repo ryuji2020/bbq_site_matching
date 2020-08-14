@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   include AjaxHelper
   before_action :ajax_authenticate_user
-  before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
 
   def create
@@ -18,9 +17,10 @@ class CommentsController < ApplicationController
         format.js { @comments = @surplus_land.comments.page(params[:page]) } #pagenationにするか？未定
       end
     else
+      @comments = @surplus_land.comments.page(params[:page]) #pagenationにするか？未定
       respond_to do |format|
         format.html { render 'surplus_lands/show' }
-        format.js { @comments = @surplus_land.comments.page(params[:page]) } #pagenationにするか？未定
+        format.js
       end
     end
   end
@@ -48,6 +48,7 @@ class CommentsController < ApplicationController
   def ajax_authenticate_user
     unless user_signed_in?
       respond_to do |format|
+        format.html { redirect_to new_user_session_path }
         format.js { render ajax_redirect_to(new_user_session_path) }
       end
     end
