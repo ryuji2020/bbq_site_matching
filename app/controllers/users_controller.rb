@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   before_action :get_user
 
   def show
-    @own_surplus_lands = @user.surplus_lands
-    @like_surplus_lands = @user.like_surplus_lands.page(params[:page])
+    @own_surplus_lands = @user.surplus_lands.includes(images_attachments: :blob)
+    @like_surplus_lands = @user.like_surplus_lands.includes(images_attachments: :blob).page(params[:page])
   end
 
   def following

@@ -53,7 +53,10 @@ RSpec.feature "Comments", type: :feature do
       # コメントをしたユーザーでサインイン
       click_link 'アカウント'
       click_link 'ログアウト'
-      sign_in user
+      visit new_user_session_path
+      fill_in 'メールアドレス', with: user.email
+      fill_in 'パスワード', with: user.password
+      click_button 'ログイン'
       visit surplus_land_path(surplus_land)
       expect(page).to have_content 'Example_Comment'
       expect(page).to have_link '削除', href: surplus_land_comment_path(surplus_land, comment)
