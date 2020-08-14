@@ -14,10 +14,10 @@ class CommentsController < ApplicationController
           flash[:success] = @message
           redirect_to @surplus_land
         end
-        format.js { @comments = @surplus_land.comments.page(params[:page]) } #pagenationにするか？未定
+        format.js { @comments = @surplus_land.comments.page(params[:page]) } # pagenationにするか？未定
       end
     else
-      @comments = @surplus_land.comments.page(params[:page]) #pagenationにするか？未定
+      @comments = @surplus_land.comments.page(params[:page]) # pagenationにするか？未定
       respond_to do |format|
         format.html { render 'surplus_lands/show' }
         format.js
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
         flash[:success] = 'コメントを削除しました'
         redirect_to @surplus_land
       end
-      format.js { @comments = @surplus_land.comments.page(params[:page]) } #pagenationにするか？未定
+      format.js { @comments = @surplus_land.comments.page(params[:page]) } # pagenationにするか？未定
     end
   end
 

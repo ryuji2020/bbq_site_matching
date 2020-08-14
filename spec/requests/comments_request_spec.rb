@@ -6,7 +6,7 @@ RSpec.describe "Comments", type: :request do
 
   before(:each) { create(:prefecture) }
 
-  describe "POST /surplus_land/:surplus_land_id/comments" do
+  describe "POST /surplus_lands/:surplus_land_id/comments" do
     let(:params) do
       {
         comment: {
@@ -67,7 +67,7 @@ RSpec.describe "Comments", type: :request do
     end
   end
 
-  describe 'DELETE /surplus_land/:surplus_land_id/comments/:id' do
+  describe 'DELETE /surplus_lands/:surplus_land_id/comments/:id' do
     let!(:comment) { create(:comment, surplus_land: surplus_land, user: user) }
 
     context 'when not user signed in' do
