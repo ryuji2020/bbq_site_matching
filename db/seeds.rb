@@ -49,10 +49,16 @@ users.each do |user|
     )
   end
 end
-
+# 画像を3枚づつ追加
 surplus_lands = SurplusLand.all
 surplus_lands.each_with_index do |surplus_land, i|
   surplus_land.images.attach(io: File.open(Rails.root.join("db/fixtures/image#{i}.jpg")), filename: "image#{i}.jpg")
+end
+surplus_lands.each do |surplus_land|
+  surplus_land.images.attach(io: File.open(Rails.root.join("db/fixtures/image0.jpg")), filename: "image0.jpg")
+end
+surplus_lands.each do |surplus_land|
+  surplus_land.images.attach(io: File.open(Rails.root.join("db/fixtures/image10.jpg")), filename: "image10.jpg")
 end
 
 # お気に入り登録

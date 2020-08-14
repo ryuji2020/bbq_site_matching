@@ -4,6 +4,7 @@ class SurplusLand < ApplicationRecord
   belongs_to :prefecture, foreign_key: 'state', primary_key: 'name'
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
+  has_many :comments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
