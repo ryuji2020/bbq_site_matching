@@ -16,7 +16,7 @@ class SurplusLandsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@surplus_land) do |surplus_land, marker|
       marker.lat surplus_land.latitude
       marker.lng surplus_land.longitude
-      marker.infowindow surplus_land.name
+      marker.infowindow surplus_land.title
     end
   end
 
