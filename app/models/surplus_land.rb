@@ -19,6 +19,8 @@ class SurplusLand < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   attr_accessor :image_ids
   paginates_per 12
+  geocoded_by :full_address
+  after_validation :geocode
 
   # resize images
   def square_thumb
@@ -29,5 +31,11 @@ class SurplusLand < ApplicationRecord
         crop: "230x230+0+0"
       }
     ).processed
+  end
+
+  private
+
+  def full_address
+    state + address
   end
 end

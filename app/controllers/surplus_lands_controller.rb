@@ -13,6 +13,11 @@ class SurplusLandsController < ApplicationController
     @surplus_land = SurplusLand.includes(images_attachments: :blob).find(params[:id])
     @comments = @surplus_land.comments.includes(:user).page(params[:page]) # pagenationにするか？未定
     @comment = @surplus_land.comments.build
+    @hash = Gmaps4rails.build_markers(@surplus_land) do |surplus_land, marker|
+      marker.lat surplus_land.latitude
+      marker.lng surplus_land.longitude
+      marker.infowindow surplus_land.title
+    end
   end
 
   def new

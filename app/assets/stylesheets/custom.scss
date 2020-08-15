@@ -137,6 +137,12 @@ ul, ol {
     }
   }
 }
+/*-------------------------------- google map --------------------------------*/
+.google-map {
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto;
+}
 /*============================== footer ======================================*/
 footer {
   @include ignore-container;
