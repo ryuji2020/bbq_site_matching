@@ -17,6 +17,7 @@ class SurplusLandsController < ApplicationController
       marker.lat surplus_land.latitude
       marker.lng surplus_land.longitude
       marker.infowindow surplus_land.name
+    end
   end
 
   def new
