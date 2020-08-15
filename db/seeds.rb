@@ -38,13 +38,19 @@ users.each do |user|
     title = Faker::University.name
     price = (n + 1) * 100
     state = ['東京都', '神奈川県', '大阪府', '京都府', '北海道']
-    address = Faker::Address.street_address
+    address = [
+      '新宿区歌舞伎町1-11-8',
+      '川崎市多摩区東三田2-1-1',
+      '大阪府大阪市中央区大阪城1-1',
+      '京都市中央区二条城町541',
+      '苫小牧市美園町1-9-3'
+    ]
     description = Faker::Lorem.sentence(word_count: 5)
     user.surplus_lands.create!(
       title: title,
       price: price,
       state: state[n],
-      address: address,
+      address: address[n],
       description: description
     )
   end
