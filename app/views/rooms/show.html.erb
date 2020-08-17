@@ -14,7 +14,7 @@
     <% @messages.each do |message| %>
       <% if message.sender == current_user %>
         <div class="">
-          <%= message.content %> : <%= message.sender.name %>
+          <%= message.content %> : <%= message.sender.name %> | <%= link_to '取消', room_message_path(@room, message), method: :delete, data: { confirm: 'メッセージの送信を取り消しますか？' } %>
         </div>
       <% else %>
         <div class="">
