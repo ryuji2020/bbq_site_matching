@@ -28,7 +28,8 @@
           <%= f.submit '申し込む', class: 'btn btn-default' %>
         <% end %>
       <% end %>
-    <% elsif user_signed_in? && @surplus_land.user == current_user %> <!-- 通知を作るまでのつなぎとしてOwner側からのルームへのリンク表示 -->
+    <!-- 通知を作るまでのつなぎとしてOwner側からのルームへのリンク表示 -->
+    <% elsif user_signed_in? && @surplus_land.user == current_user %>
       <% if @surplus_land.rooms.any? %>
         <% @surplus_land.rooms.each do |room| %>
           <%= link_to "#{room.visitor.name}とのルーム", room %>
