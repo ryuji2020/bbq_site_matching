@@ -3,6 +3,14 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    surplus_land = @room.surplus_land
+    if request.referrer == surplus_land_url(surplus_land) && current_user != surplus_land.user
+      current_user.send_messages.create(
+        content: 'もう一度行きたいです！',
+        receiver_id: surplus_land.user_id,
+        room_id: @room.id
+      )
+    end
     @messages = Message.where(room_id: @room.id).includes(:sender)
   end
 
@@ -12,7 +20,7 @@ class RoomsController < ApplicationController
     if room.save
       current_user.send_messages.create(
         content: '行ってみたいです！',
-        receiver_id: surplus_land.user.id,
+        receiver_id: surplus_land.user_id,
         room_id: room.id
       )
       redirect_to room
