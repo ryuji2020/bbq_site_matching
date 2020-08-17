@@ -23,7 +23,7 @@ class SurplusLand < ApplicationRecord
   geocoded_by :full_address
   after_validation :geocode
 
-  alias_method :owner, :user
+  alias_method :owner, :user # Roomからdelegateで呼び出す時のみの使用とする
 
   # resize images
   def square_thumb
