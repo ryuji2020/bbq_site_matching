@@ -1,7 +1,7 @@
 class Message < ApplicationRecord
   belongs_to :room
   belongs_to :sender, class_name: 'User'
-  belongs_to :receiver, class_name: 'User'
+  # belongs_to :receiver, class_name: 'User' 不要になるかもなのでいったんコメントアウトしておく
 
   validates :content, presence: true, length: { maximum: 140 }
   validates :room_id, presence: true

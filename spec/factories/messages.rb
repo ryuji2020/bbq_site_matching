@@ -3,6 +3,6 @@ FactoryBot.define do
     sequence(:content) { |n| "Example Message_#{n}" }
     room { nil }
     sender { nil }
-    receiver { nil }
+    receiver_id { nil }
   end
 end
