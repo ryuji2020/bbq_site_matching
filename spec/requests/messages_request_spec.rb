@@ -7,7 +7,7 @@ RSpec.describe "Messages", type: :request do
 
   describe 'POST /rooms/:room_id/messages' do
     let(:params) { { message: { content: 'Example-message' } } } # receiver_idに関しては不要になるかもなのでいったんテストは書かない
-    
+
     context 'when not user signed in' do
       it 'not created a message' do
         expect do
@@ -32,11 +32,22 @@ RSpec.describe "Messages", type: :request do
       context 'sign in with visitor' do
         before(:each) { sign_in visitor }
 
-        it 'success to create a message' do
-          expect do
-            post room_messages_path(room), params: params
-          end.to change(Message, :count).by(1)
-          expect(Message.last.sender).to eq visitor
+        context 'message is valid' do
+          it 'success to create a message' do
+            expect do
+              post room_messages_path(room), params: params
+            end.to change(Message, :count).by(1)
+            expect(Message.last.sender).to eq visitor
+          end
+        end
+
+        context 'message is invalid' do
+          it 'failed to create a message' do
+            expect do
+              post room_messages_path(room), params: { message: { content: '' } }
+            end.not_to change(Message, :count)
+            expect(response).to render_template 'rooms/show'
+          end
         end
       end
     end
