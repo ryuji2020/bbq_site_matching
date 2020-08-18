@@ -3,12 +3,15 @@ inherit_from:
   - .rubocop_airbnb.yml
 
 Metrics/LineLength:
-  Max: 120
+  Max: 130
 
 Airbnb/OptArgParameters:
   Enabled: false
 
 Airbnb/DefaultScope:
+  Enabled: false
+
+Airbnb/SimpleUnless:
   Enabled: false
 
 Style/PercentLiteralDelimiters:

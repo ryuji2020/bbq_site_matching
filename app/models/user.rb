@@ -13,6 +13,15 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships
   has_many :comments, dependent: :destroy
+  has_many :visit_rooms,
+    class_name: 'Room',
+    foreign_key: 'visitor_id'
+  has_many :send_messages,
+    class_name: 'Message',
+    foreign_key: 'sender_id'
+  has_many :receive_messages,
+    class_name: 'Message',
+    foreign_key: 'receiver_id'
 
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

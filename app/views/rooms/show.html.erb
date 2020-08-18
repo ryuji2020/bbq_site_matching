@@ -1,0 +1,45 @@
+<% provide(:title, 'Talk Room') %>
+
+<%= render 'shared/page_title', page_title: @room.surplus_land.title %>
+<h3>
+  <% if current_user == @room.owner %>
+    <%= @room.visitor.name %>があなたのキャンプ地に来たいと言っています！
+  <% else %>
+    所有者の<%= @room.owner.name %>とメッセージのやり取りをしましょう！
+  <% end %>
+</h3>
+
+<div class=""> <!-- message-field -->
+  <% if @messages %>
+    <% @messages.each do |message| %>
+      <% if message.sender == current_user %>
+        <div class="">
+          <%= message.content %> : <%= message.sender.name %> | <%= link_to '取消', room_message_path(@room, message), method: :delete, data: { confirm: 'メッセージの送信を取り消しますか？' } %>
+        </div>
+      <% else %>
+        <div class="">
+          <%= message.sender.name %> : <%= message.content %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class=""> <!-- message-form -->
+  <%= form_for current_user.send_messages.build, url: room_messages_path(@room) do |f| %>
+    <% if @room.owner == current_user %>
+      <%= f.hidden_field :receiver_id, value: @room.visitor_id %>
+    <% else %>
+      <%= f.hidden_field :receiver_id, value: @room.owner.id %>
+    <% end %>
+    <div class="form-group">
+      <%= f.text_field :content, placeholder: 'メッセージを入力してください', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit '送信', class: 'btn btn-default form-control' %>
+    </div>
+  <% end %>
+</div>
+
+<br>
+<%= link_to 'back', @room.surplus_land, data: { turbolinks: false } %>

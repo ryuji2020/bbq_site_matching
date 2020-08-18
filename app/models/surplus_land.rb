@@ -5,6 +5,7 @@ class SurplusLand < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
+  has_many :rooms
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -22,6 +23,8 @@ class SurplusLand < ApplicationRecord
   geocoded_by :full_address
   after_validation :geocode
 
+  alias_method :owner, :user # Roomからdelegateで呼び出す時のみの使用とする
+
   # resize images
   def square_thumb
     images.first.variant(
@@ -36,6 +39,6 @@ class SurplusLand < ApplicationRecord
   private
 
   def full_address
-    state + address
+    state + address if state.present?
   end
 end
