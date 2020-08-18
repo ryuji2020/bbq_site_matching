@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :message do
-    content { "MyText" }
+    sequence(:content) { |n| "Example Message_#{n}" }
     room { nil }
-    sender_id { 1 }
-    receiver_id { 1 }
+    sender { nil }
+    receiver { nil }
   end
 end

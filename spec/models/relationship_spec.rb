@@ -8,7 +8,6 @@ RSpec.describe Relationship, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of :follower_id }
-
     it { should validate_presence_of :followed_id }
 
     it 'follower_id and followed_id combination is uniqueness' do
@@ -21,7 +20,6 @@ RSpec.describe Relationship, type: :model do
 
   describe 'association' do
     it { should belong_to :follower }
-
     it { should belong_to :followed }
 
     it 'destroyed depedent to follower' do

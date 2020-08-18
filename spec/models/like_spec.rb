@@ -9,7 +9,6 @@ RSpec.describe Like, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:user_id) }
-
     it { should validate_presence_of(:surplus_land_id) }
 
     it 'surplus_land_id is uniqueness within the scope of user_id' do
@@ -22,7 +21,6 @@ RSpec.describe Like, type: :model do
 
   describe 'association' do
     it { should belong_to :user }
-
     it { should belong_to :surplus_land }
 
     it 'destroyed dependent to user' do
