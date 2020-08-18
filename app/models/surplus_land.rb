@@ -39,6 +39,6 @@ class SurplusLand < ApplicationRecord
   private
 
   def full_address
-    state + address
+    state + address if state.present?
   end
 end

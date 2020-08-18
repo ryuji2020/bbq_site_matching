@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
     it { should validate_length_of(:name).is_at_most(50) }
     it { should validate_presence_of(:email) }
     it { should validate_length_of(:profile).is_at_most(400) }
-    
+
     it 'email validation should accept valid addresses' do
       valid_addresses = %w[
         user@example.com

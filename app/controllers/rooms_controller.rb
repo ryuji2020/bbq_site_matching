@@ -33,7 +33,7 @@ class RoomsController < ApplicationController
 
   private
 
-  #before_action
+  # before_action
 
   def correct_user
     @room = Room.find(params[:id])
