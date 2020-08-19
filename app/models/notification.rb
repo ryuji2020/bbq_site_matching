@@ -4,6 +4,7 @@ class Notification < ApplicationRecord
   belongs_to :surplus_land, optional: true
   belongs_to :room, optional: true
   belongs_to :message, optional: true
+  belongs_to :comment, optional: true
 
   default_scope -> { order(created_at: :desc) }
 end
