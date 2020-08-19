@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
         content: 'もう一度行きたいです！',
         room_id: @room.id
       )
-      message.create_notification(current_user, @room)
+      message.create_notification(current_user)
     end
     @messages = Message.where(room_id: @room.id).includes(:sender)
     session.delete(:last_request)
@@ -23,7 +23,7 @@ class RoomsController < ApplicationController
         content: '行ってみたいです！',
         room_id: room.id
       )
-      message.create_notification(current_user, room)
+      message.create_notification(current_user)
       session[:last_request] = request.original_url # createを経由しているか否かがわかればいいのでUrlである必要はない
       redirect_to room
     else

@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_093921) do
   create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
-    t.integer "suplurs_land_id"
+    t.integer "surplus_land_id"
     t.integer "room_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false

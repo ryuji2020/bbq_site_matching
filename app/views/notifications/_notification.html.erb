@@ -6,7 +6,11 @@
   <% when 'like' %>
 
   <% when 'comment' %>
-
+    <% if notification.surplus_land.user == current_user %>
+      が<%= link_to 'あなたのキャンプ地', notification.surplus_land, data: { turbolinks: false } %>にコメントしました！
+    <% else %>
+      が<%= link_to notification.surplus_land.title, notification.surplus_land, data: { turbolinks: false } %>にコメントしました！
+    <% end %>
   <% when 'message' %>
     から<%= link_to 'メッセージ', Room.find(notification.room_id) %>が届いています！
   <% end %>

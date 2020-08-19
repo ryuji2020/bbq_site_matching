@@ -8,7 +8,8 @@ class Message < ApplicationRecord
   validates :sender_id, presence: true
 
   # 通知作成メソッド
-  def create_notification(current_user, room)
+  def create_notification(current_user)
+    room = self.room
     visited_id = current_user == room.visitor ? room.owner.id : room.visitor_id
     notification = current_user.active_notifications.build(
       visited_id: visited_id,
