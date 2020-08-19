@@ -1,0 +1,15 @@
+<div class="">
+  <%= link_to notification.visitor.name, notification.visitor %>
+  <% case notification.action %>
+  <% when 'follow' %>
+
+  <% when 'like' %>
+
+  <% when 'comment' %>
+
+  <% when 'message' %>
+    から<%= link_to 'メッセージ', Room.find(notification.room_id) %>が届いています！
+  <% end %>
+  <p class="text-right"><%= time_ago_in_words(notification.created_at) %> ago</p>
+</div>
+<hr>
