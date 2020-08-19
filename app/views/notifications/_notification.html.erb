@@ -2,7 +2,7 @@
   <%= link_to notification.visitor.name, notification.visitor %>
   <% case notification.action %>
   <% when 'follow' %>
-
+    があなたをフォローしました！
   <% when 'like' %>
     が<%= link_to 'あなたのキャンプ地', notification.surplus_land, data: { turbolinks: false } %>をお気に入りしました！
   <% when 'comment' %>
