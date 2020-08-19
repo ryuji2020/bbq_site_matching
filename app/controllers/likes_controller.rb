@@ -5,6 +5,7 @@ class LikesController < ApplicationController
   def create
     @surplus_land = SurplusLand.find(params[:surplus_land_id])
     current_user.like(@surplus_land)
+    @surplus_land.create_like_notification(current_user)
     respond_to do |format|
       format.html { redirect_to request.referrer || root_url }
       format.js

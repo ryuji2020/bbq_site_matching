@@ -4,7 +4,7 @@
   <% when 'follow' %>
 
   <% when 'like' %>
-
+    が<%= link_to 'あなたのキャンプ地', notification.surplus_land, data: { turbolinks: false } %>をお気に入りしました！
   <% when 'comment' %>
     <% if notification.surplus_land.user == current_user %>
       が<%= link_to 'あなたのキャンプ地', notification.surplus_land, data: { turbolinks: false } %>にコメントしました！

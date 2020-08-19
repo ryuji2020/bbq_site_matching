@@ -7,6 +7,7 @@ class Comment < ApplicationRecord
   validates :user_id, presence: true
   validates :surplus_land_id, presence: true
 
+  # 通知作成
   def create_notification(current_user)
     surplus_land = self.surplus_land
     owner_and_comment_user_ids = Comment.where(surplus_land_id: surplus_land.id).where.not(user_id: current_user.id).pluck(:user_id).uniq
@@ -18,7 +19,7 @@ class Comment < ApplicationRecord
         comment_id: id,
         action: 'comment'
       )
-      if notification.visitor_id == notification.visited_id
+      if surplus_land.in?(current_user.surplus_lands)
         notification.checked = true
       end
       notification.save if notification.valid?

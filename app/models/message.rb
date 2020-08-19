@@ -7,7 +7,7 @@ class Message < ApplicationRecord
   validates :room_id, presence: true
   validates :sender_id, presence: true
 
-  # 通知作成メソッド
+  # 通知作成
   def create_notification(current_user)
     room = self.room
     visited_id = current_user == room.visitor ? room.owner.id : room.visitor_id

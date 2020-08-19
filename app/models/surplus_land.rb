@@ -37,6 +37,21 @@ class SurplusLand < ApplicationRecord
     ).processed
   end
 
+  # いいね通知作成
+  def create_like_notification(current_user)
+    unless Notification.find_by(visitor_id: current_user.id, visited_id: user_id, action: 'like')
+      notification = current_user.active_notifications.build(
+        visited_id: user_id,
+        surplus_land_id: id,
+        action: 'like'
+      )
+      if in?(current_user.surplus_lands)
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+    end
+  end
+
   private
 
   def full_address
