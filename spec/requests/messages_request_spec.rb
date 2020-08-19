@@ -6,7 +6,7 @@ RSpec.describe "Messages", type: :request do
   let(:room) { create(:room, surplus_land: surplus_land, visitor: visitor) }
 
   describe 'POST /rooms/:room_id/messages' do
-    let(:params) { { message: { content: 'Example-message' } } } # receiver_idに関しては不要になるかもなのでいったんテストは書かない
+    let(:params) { { message: { content: 'Example-message' } } }
 
     context 'when not user signed in' do
       it 'not created a message' do

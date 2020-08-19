@@ -8,7 +8,6 @@ class RoomsController < ApplicationController
     if request.referrer == surplus_land_url(surplus_land) && current_user != surplus_land.user && !session[:last_request]
       current_user.send_messages.create(
         content: 'もう一度行きたいです！',
-        receiver_id: surplus_land.user_id,
         room_id: @room.id
       )
     end
@@ -21,7 +20,6 @@ class RoomsController < ApplicationController
     if room.save
       current_user.send_messages.create(
         content: '行ってみたいです！',
-        receiver_id: @surplus_land.user_id,
         room_id: room.id
       )
       session[:last_request] = request.original_url # createを経由しているか否かがわかればいいのでUrlである必要はない
