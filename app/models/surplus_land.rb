@@ -5,7 +5,8 @@ class SurplusLand < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
-  has_many :rooms
+  has_many :rooms, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -34,6 +35,21 @@ class SurplusLand < ApplicationRecord
         crop: "230x230+0+0"
       }
     ).processed
+  end
+
+  # いいね通知作成
+  def create_like_notification(current_user)
+    unless Notification.find_by(visitor_id: current_user.id, visited_id: user_id, action: 'like')
+      notification = current_user.active_notifications.build(
+        visited_id: user_id,
+        surplus_land_id: id,
+        action: 'like'
+      )
+      if in?(current_user.surplus_lands)
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+    end
   end
 
   private

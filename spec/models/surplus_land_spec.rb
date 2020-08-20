@@ -37,8 +37,14 @@ RSpec.describe SurplusLand, type: :model do
     end
   end
 
-  describe 'association' do
+  describe 'associations' do
     it { should belong_to :user }
+    it { should belong_to(:prefecture).with_foreign_key('state').with_primary_key('name') }
+    it { should have_many(:likes).dependent(:destroy) }
+    it { should have_many(:like_users).through(:likes).source(:user) }
+    it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:rooms).dependent(:destroy) }
+    it { should have_many(:notifications).dependent(:destroy) }
 
     describe 'references prefecture' do
       let(:surplus_land) { create(:surplus_land, :with_prefecture, :with_user) }

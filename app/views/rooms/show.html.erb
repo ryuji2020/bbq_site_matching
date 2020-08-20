@@ -27,11 +27,6 @@
 
 <div class=""> <!-- message-form -->
   <%= form_for current_user.send_messages.build, url: room_messages_path(@room) do |f| %>
-    <% if @room.owner == current_user %>
-      <%= f.hidden_field :receiver_id, value: @room.visitor_id %>
-    <% else %>
-      <%= f.hidden_field :receiver_id, value: @room.owner.id %>
-    <% end %>
     <div class="form-group">
       <%= f.text_field :content, placeholder: 'メッセージを入力してください', class: 'form-control' %>
     </div>

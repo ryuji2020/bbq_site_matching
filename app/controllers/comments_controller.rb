@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     @comment.surplus_land_id = @surplus_land.id
     if @comment.save
+      @comment.create_notification(current_user)
       @message = 'コメントを投稿しました'
       respond_to do |format|
         format.html do

@@ -19,16 +19,8 @@ RSpec.describe Like, type: :model do
     end
   end
 
-  describe 'association' do
-    it { should belong_to :user }
+  describe 'associations' do
     it { should belong_to :surplus_land }
-
-    it 'destroyed dependent to user' do
-      expect { user.destroy }.to change(Like, :count).by(-1)
-    end
-
-    it 'destroyed dependent to surplus_land' do
-      expect { surplus_land.destroy }.to change(Like, :count).by(-1)
-    end
+    it { should belong_to :user }
   end
 end

@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     @room = Room.find(params[:room_id])
     message = current_user.send_messages.build(message_params.merge(room_id: @room.id))
     if message.save
+      message.create_notification(current_user)
       redirect_to @room
     else
       @messages = Message.where(room_id: @room.id).includes(:sender)
@@ -23,7 +24,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:content, :receiver_id)
+    params.require(:message).permit(:content)
   end
 
   # before_action

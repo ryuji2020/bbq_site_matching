@@ -1,0 +1,19 @@
+<div class="">
+  <%= link_to notification.visitor.name, notification.visitor %>
+  <% case notification.action %>
+  <% when 'follow' %>
+    があなたをフォローしました！
+  <% when 'like' %>
+    が<%= link_to 'あなたのキャンプ地', notification.surplus_land, data: { turbolinks: false } %>をお気に入りしました！
+  <% when 'comment' %>
+    <% if notification.surplus_land.user == current_user %>
+      が<%= link_to 'あなたのキャンプ地', notification.surplus_land, data: { turbolinks: false } %>にコメントしました！
+    <% else %>
+      が<%= link_to notification.surplus_land.title, notification.surplus_land, data: { turbolinks: false } %>にコメントしました！
+    <% end %>
+  <% when 'message' %>
+    から<%= link_to 'メッセージ', Room.find(notification.room_id) %>が届いています！
+  <% end %>
+  <p class="text-right"><%= time_ago_in_words(notification.created_at) %> ago</p>
+</div>
+<hr>

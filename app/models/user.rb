@@ -15,13 +15,20 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :visit_rooms,
     class_name: 'Room',
-    foreign_key: 'visitor_id'
+    foreign_key: 'visitor_id',
+    dependent: :destroy
   has_many :send_messages,
     class_name: 'Message',
-    foreign_key: 'sender_id'
-  has_many :receive_messages,
-    class_name: 'Message',
-    foreign_key: 'receiver_id'
+    foreign_key: 'sender_id',
+    dependent: :destroy
+  has_many :active_notifications,
+    class_name: 'Notification',
+    foreign_key: 'visitor_id',
+    dependent: :destroy
+  has_many :passive_notifications,
+    class_name: 'Notification',
+    foreign_key: 'visited_id',
+    dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -55,5 +62,16 @@ class User < ApplicationRecord
   # other_userのフォローを解除する
   def unfollow(other_user)
     following.delete(other_user)
+  end
+
+  # フォロー通知作成
+  def create_follow_notification(current_user)
+    unless Notification.find_by(visitor_id: current_user.id, visited_id: id, action: 'follow')
+      notification = current_user.active_notifications.build(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
   end
 end

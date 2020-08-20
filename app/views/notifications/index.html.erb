@@ -1,0 +1,9 @@
+<% provide(:title, 'Notification') %>
+
+<%= render 'shared/page_title', page_title: '通知一覧' %>
+
+<% if @notifications.present? %>
+  <%= render @notifications %>
+<% else %>
+    <p>通知はありません</p>
+<% end %>

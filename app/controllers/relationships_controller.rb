@@ -9,6 +9,7 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:followed_id])
     if !current_user.following?(@user)
       current_user.follow(@user)
+      @user.create_follow_notification(current_user)
       respond_to do |format|
         format.html { redirect_to request.referrer || @user }
         format.js

@@ -18,16 +18,8 @@ RSpec.describe Relationship, type: :model do
     end
   end
 
-  describe 'association' do
-    it { should belong_to :follower }
-    it { should belong_to :followed }
-
-    it 'destroyed depedent to follower' do
-      expect { user.destroy }.to change(Relationship, :count).by(-1)
-    end
-
-    it 'destroyed depedent to followed' do
-      expect { michael.destroy }.to change(Relationship, :count).by(-1)
-    end
+  describe 'associations' do
+    it { should belong_to(:follower).class_name('User') }
+    it { should belong_to(:followed).class_name('User') }
   end
 end

@@ -6,11 +6,11 @@ class RoomsController < ApplicationController
   def show
     surplus_land = @room.surplus_land
     if request.referrer == surplus_land_url(surplus_land) && current_user != surplus_land.user && !session[:last_request]
-      current_user.send_messages.create(
+      message = current_user.send_messages.create(
         content: 'もう一度行きたいです！',
-        receiver_id: surplus_land.user_id,
         room_id: @room.id
       )
+      message.create_notification(current_user)
     end
     @messages = Message.where(room_id: @room.id).includes(:sender)
     session.delete(:last_request)
@@ -19,11 +19,11 @@ class RoomsController < ApplicationController
   def create
     room = @surplus_land.rooms.build(visitor_id: current_user.id)
     if room.save
-      current_user.send_messages.create(
+      message = current_user.send_messages.create(
         content: '行ってみたいです！',
-        receiver_id: @surplus_land.user_id,
         room_id: room.id
       )
+      message.create_notification(current_user)
       session[:last_request] = request.original_url # createを経由しているか否かがわかればいいのでUrlである必要はない
       redirect_to room
     else

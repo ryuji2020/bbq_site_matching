@@ -54,16 +54,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'association' do
-    it { should have_many :surplus_lands }
-
-    describe 'dependent destroy' do
-      let!(:user) { create(:user) }
-      let!(:surplus_land) { create(:surplus_land, :with_prefecture, user: user) }
-
-      it 'destroys dependent surplus_lands' do
-        expect { user.destroy }.to change(SurplusLand, :count).by(-1)
-      end
-    end
+  describe 'associations' do
+    it { should have_many(:surplus_lands).dependent(:destroy) }
+    it { should have_many(:likes).dependent(:destroy) }
+    it { should have_many(:like_surplus_lands).through(:likes).source(:surplus_land) }
+    it { should have_many(:active_relationships).class_name('Relationship').with_foreign_key('follower_id') }
+    it { should have_many(:passive_relationships).class_name('Relationship').with_foreign_key('followed_id') }
+    it { should have_many(:following).through(:active_relationships).source(:followed) }
+    it { should have_many(:followers).through(:passive_relationships) }
+    it { should have_many(:visit_rooms).class_name('Room').with_foreign_key('visitor_id').dependent(:destroy) }
+    it { should have_many(:send_messages).class_name('Message').with_foreign_key('sender_id').dependent(:destroy) }
+    it { should have_many(:active_notifications).class_name('Notification').with_foreign_key('visitor_id').dependent(:destroy) }
+    it { should have_many(:passive_notifications).class_name('Notification').with_foreign_key('visited_id').dependent(:destroy) }
   end
 end
