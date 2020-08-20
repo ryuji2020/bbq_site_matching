@@ -7,7 +7,7 @@ RSpec.describe Notification, type: :model do
     it { should validate_presence_of :action }
   end
 
-  describe 'association' do
+  describe 'associations' do
     it { should belong_to(:visitor).class_name('User') }
     it { should belong_to(:visited).class_name('User') }
 

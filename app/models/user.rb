@@ -15,10 +15,12 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :visit_rooms,
     class_name: 'Room',
-    foreign_key: 'visitor_id'
+    foreign_key: 'visitor_id',
+    dependent: :destroy
   has_many :send_messages,
     class_name: 'Message',
-    foreign_key: 'sender_id'
+    foreign_key: 'sender_id',
+    dependent: :destroy
   has_many :active_notifications,
     class_name: 'Notification',
     foreign_key: 'visitor_id',

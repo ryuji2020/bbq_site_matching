@@ -5,7 +5,7 @@ class SurplusLand < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
-  has_many :rooms
+  has_many :rooms, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
