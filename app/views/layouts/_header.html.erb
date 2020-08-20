@@ -44,11 +44,11 @@
           </li>
         <% end %>
       </ul>
-      <%= form_tag '#', method: :get, class: 'navbar-form navbar-right', role: 'search' do %>
+      <%= form_for :q, url: search_surplus_lands_path, html: { class: 'navbar-form navbar-right' }, method: :get, role: 'search' do |f| %>
         <div class="form-group">
-          <%= text_field_tag :search, '', class: 'form-control', placeholder: 'キーワードで検索' %>
+          <%= f.search_field :title_or_state_cont, class: 'form-control', placeholder: 'キーワードで検索' %>
         </div>
-        <%= submit_tag '検索', name: nil, class: 'btn btn-default' %>
+        <%= f.submit '検索', class: 'btn btn-default' %>
       <% end %>
     </div>
   </div>
