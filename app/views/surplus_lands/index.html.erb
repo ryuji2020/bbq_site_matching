@@ -120,8 +120,11 @@
   </div>
   <!-- surplus_lands item -->
   <div class="col-sm-9">
-    <% if @surplus_lands.empty? %>
-      <h4 class="mt50"><%= "#{@prefecture_name}のキャンプ地はまだ登録されていません" %></h4>
+    <% if @surplus_lands.blank? %>
+      <h4 class="mt50">
+        <%= "#{@prefecture_name}のキャンプ地はまだ登録されていません" if @prefecture_name.present? %>
+        <%= "「#{@search_word}」の検索結果は見つかりませんでした" if @search_word.present? %>
+      </h4>
     <% end %>
     <div class="row">
       <%= render @surplus_lands, md: 4 %>

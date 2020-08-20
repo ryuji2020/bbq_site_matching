@@ -2,7 +2,7 @@ class SurplusLandsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_prefecture_array, only: [:new, :create, :edit, :update]
-  before_action :get_region_prefectures, only: [:index, :refine_search]
+  before_action :get_region_prefectures, only: [:index, :refine_search, :search]
 
   def index
     @surplus_lands = SurplusLand.includes(images_attachments: :blob).page(params[:page])
@@ -64,6 +64,14 @@ class SurplusLandsController < ApplicationController
     @prefecture_name = params[:id]
     @surplus_lands = SurplusLand.where(state: @prefecture_name).includes(images_attachments: :blob).page(params[:page])
     @page_title = "#{@prefecture_name}のキャンプ地＆BBQ場"
+    render 'index'
+  end
+
+  def search
+    q = SurplusLand.ransack(params[:q])
+    @surplus_lands = q.result.includes(images_attachments: :blob).page(params[:page])
+    @search_word = params[:q][:title_or_state_cont]
+    @page_title = "「#{@search_word}」の検索結果"
     render 'index'
   end
 
