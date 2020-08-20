@@ -1,6 +1,6 @@
 <% provide(:title, 'Talk Room') %>
+<% provide(:page_title, @room.surplus_land.title) %>
 
-<%= render 'shared/page_title', page_title: @room.surplus_land.title %>
 <h3>
   <% if current_user == @room.owner %>
     <%= @room.visitor.name %>があなたのキャンプ地に来たいと言っています！

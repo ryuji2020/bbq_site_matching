@@ -1,6 +1,5 @@
 <% provide(:title, 'Log in') %>
-
-<%= render 'shared/page_title', page_title: 'ログイン' %>
+<% provide(:page_title, 'ログイン') %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group">

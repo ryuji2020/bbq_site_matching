@@ -1,6 +1,5 @@
 <% provide(:title, 'Sign up') %>
-
-<%= render 'shared/page_title', page_title: 'ユーザー登録' %>
+<% provide(:page_title, 'ユーザー登録') %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
