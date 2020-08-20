@@ -19,7 +19,7 @@ class Comment < ApplicationRecord
         comment_id: id,
         action: 'comment'
       )
-      if surplus_land.in?(current_user.surplus_lands)
+      if notification.visitor == notification.visited
         notification.checked = true
       end
       notification.save if notification.valid?
