@@ -51,7 +51,7 @@ RSpec.feature "Comments", type: :feature do
       expect(page).to have_content 'Example_Comment'
       expect(page).to have_no_link '削除'
       # コメントをしたユーザーでサインイン
-      click_link 'アカウント'
+      click_link other_user.name
       click_link 'ログアウト'
       visit new_user_session_path
       fill_in 'メールアドレス', with: user.email

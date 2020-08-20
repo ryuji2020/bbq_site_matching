@@ -26,8 +26,7 @@ RSpec.describe Notification, type: :model do
           room: room,
           message: message,
           comment: comment,
-          action: 'action'
-        )
+          action: 'action')
       end
 
       it 'defined methods correctly' do
