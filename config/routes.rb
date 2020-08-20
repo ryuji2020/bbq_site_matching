@@ -7,9 +7,8 @@ Rails.application.routes.draw do
     end
   end
   resources :surplus_lands do
-    member do
-      get :refine_search
-    end
+    get :refine_search, on: :member
+    get :search, on: :collection
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
