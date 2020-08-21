@@ -4,11 +4,17 @@
 /*=========================== mixin, variable ===============================*/
 $site-color: #205829;
 
+$site-color-light: #f7fff5;
+
 @mixin ignore-container {
   margin: 0 calc(50% - 50vw);
   width: 100vw;
 }
 /*============================== common =====================================*/
+body {
+  background-color: $site-color-light;
+}
+
 a {
   color: #777;
   &:hover {
@@ -22,10 +28,17 @@ p {
 
 ul, ol {
   list-style: none;
+  padding: 0;
 }
 
 .alert {
   @include ignore-container;
+}
+
+.content {
+  background-color: #fff;
+  padding: 40px 40px;
+  border-radius: 20px;
 }
 /*------------------------------- spacing ------------------------------------*/
 .mt30 {
@@ -48,6 +61,14 @@ ul, ol {
   margin-bottom: 50px;
 }
 
+.ml30 {
+  margin-left: 30px;
+}
+
+.pb50 {
+  padding-bottom: 50px;
+}
+
 .py50 {
   padding: 50px 0;
 }
@@ -59,9 +80,21 @@ ul, ol {
 .red {
   color: red;
 }
+
+.site-color {
+  color: $site-color;
+}
 /*--------------------------------- display ----------------------------------*/
 .d-inline {
   display: inline;
+}
+
+.d-i-block {
+  display: inline-block;
+}
+/*-------------------------------- button ------------------------------------*/
+.btn.request {
+  width: 200px;
 }
 /*================================ page_title ================================*/
 .page-title {
@@ -153,7 +186,22 @@ ul, ol {
     width: 85%;
   }
 }
+/*============================= surplus_land index page ======================*/
+.prefecture-link {
+  display: block;
+}
 /*============================ surplu_land show page =========================*/
+a.apply-again {
+  text-decoration: none;
+}
+.description-heading {
+  color: $site-color;
+  background-color: $site-color-light;
+  width: 130px;
+  padding: 5px 0;
+  text-align: center;
+  border-radius: 8px;
+}
 /*------------------------------- slide image --------------------------------*/
 .image-box {
   .image {
@@ -163,10 +211,7 @@ ul, ol {
 
 .thumb-list {
   .image {
-    height: 100px;
-    @media (min-width: 992px) {
-      height: 70px;
-    }
+    height: 70px;
   }
 }
 /*-------------------------------- google map --------------------------------*/

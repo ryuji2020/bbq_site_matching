@@ -8,7 +8,19 @@ $(function() {
     });
   });
 });
-//============== surplus_land show-pageの画像表示 slickを使用 ==================
+//======================== surplus_land show page ==============================
+$(function() {
+  $(window).resize(function() {
+    var w = $(window).width();
+    var x  = 992;
+    if (w <= x) {
+      $('.apply-btn').addClass('mt30 d-i-block');
+    } else {
+      $('.apply-btn').removeClass('mt30 d-i-block');
+    }
+  });
+});
+//-------------------------- 画像表示 slickを使用 ------------------------------
 $(function() {
   $('.slider-for').slick({
     slidesToShow: 1,
@@ -25,7 +37,7 @@ $(function() {
     focusOnSelect: true
   });
 });
-//==== surplus_land index pageのアコーディオンのmargin-topを動的に変更 =========
+//======================== surplus_land index page =============================
 $(function() {
   $(window).resize(function() {
     var w = $(window).width();
