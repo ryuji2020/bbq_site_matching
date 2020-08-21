@@ -25,3 +25,15 @@ $(function() {
     focusOnSelect: true
   });
 });
+//==== surplus_land index pageのアコーディオンのmargin-topを動的に変更 =========
+$(function() {
+  $(window).resize(function() {
+    var w = $(window).width();
+    var x  = 768;
+    if (w <= x) {
+      $('#prefectureAccordion').removeClass('mt50');
+    } else {
+      $('#prefectureAccordion').addClass('mt50');
+    }
+  });
+});

@@ -15,15 +15,15 @@
   </div>
   <div class="introduction-link row">
     <div class="col-sm-6 link-text">
-      <h2>キャンプ地＆BBQ場一覧</h2>
-      <h3>キャンプ地が続々と公開されています！</h3>
+      <h2 class="mt70">キャンプ地＆BBQ場</h2>
+      <h3 class="text-center mt30">キャンプ地が続々と<br>公開されています！</h3>
       <p><%= link_to '一覧から探す', surplus_lands_path %></p>
     </div>
     <div class="col-sm-6 link-image"></div>
   </div>
   <div class="recent-land">
-    <h3 class="py50">最近追加されたキャンプ地</h4>
-    <div class="row">
+    <h3 class="py50 text-center">最近追加されたキャンプ地</h4>
+    <div class="row mt50">
       <%= render @surplus_lands, md: 3 %>
     </div>
   </div>

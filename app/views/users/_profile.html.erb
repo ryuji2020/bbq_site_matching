@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-xs-3"> <!-- gravatar -->
-    <%= gravatar_for(user, size: 70) %>
+    <%= gravatar_for(user, size: 60) %>
   </div>
   <div class="col-xs-9"> <!-- name,gender -->
-    <p>名前：<%= user.name %></p>
+    <p><%= user.name %></p>
     <p>性別：<%= user.gender %></p>
   </div>
 </div>
@@ -12,10 +12,10 @@
   <p><%= user.profile %></p>
 </div>
 <div class="row"> <!-- follow form -->
-  <div class="col-xs-8" id="stats_<%= user.id %>"> <!-- follow&follower -->
+  <div class="col-xs-8 col-md-12" id="stats_<%= user.id %>"> <!-- follow&follower -->
     <%= render 'users/stats', user: user %>
   </div>
-  <div class="col-xs-4"> <!-- follo button or edit-link -->
+  <div class="col-xs-4 col-md-12"> <!-- follo button or edit-link -->
     <%= render 'users/follow_form', user: user %>
   </div>
 </div>

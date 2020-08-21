@@ -3,7 +3,7 @@
 
 <div class="row">
   <!-- sidebar -->
-  <div class="col-sm-3 panel-group" id="prefectureAccordion">
+  <div class="col-sm-3 panel-group mt50" id="prefectureAccordion">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -127,7 +127,7 @@
     <% end %>
     <div class="row">
       <%= render @surplus_lands, md: 4 %>
+      <div class="text-center"><%= paginate @surplus_lands %></div>
     </div>
-    <%= paginate @surplus_lands %>
   </div>
 </div>
