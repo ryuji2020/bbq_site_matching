@@ -214,6 +214,15 @@ a.apply-again {
     height: 70px;
   }
 }
+/*------------------------------- comment ------------------------------------*/
+.comment-box {
+  word-wrap: break-word;
+  padding: 10px 0;
+}
+
+.row.comment-row + .row.comment-row {
+  border-top: 1px solid #ccc;
+}
 /*-------------------------------- google map --------------------------------*/
 .google-map {
   max-width: 800px;

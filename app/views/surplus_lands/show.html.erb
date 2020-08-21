@@ -53,10 +53,10 @@
     <%= link_to '編集する', edit_surplus_land_path(@surplus_land) if current_user?(@surplus_land.user) %>
   </div>
 
-  <div class="comment">
+  <div class="comment py50">
     <h3>コメント</h3>
-    <div class="row"> <!-- comment -->
-      <div class="col-md-7" id="surplus_land_comments"> <!-- comment 表示 -->
+    <div class="row mt30"> <!-- comment -->
+      <div class="col-md-7 content" id="surplus_land_comments"> <!-- comment 表示 -->
         <%= render @comments, surplus_land: @surplus_land %>
       </div>
       <div class="col-md-5"> <!-- comment form -->
