@@ -223,6 +223,15 @@ a.apply-again {
 .row.comment-row + .row.comment-row {
   border-top: 1px solid #ccc;
 }
+
+.row.comment-row.comment-0 {
+  border-top: 1px solid #ccc;
+}
+
+.read-more-btn {
+  cursor: pointer;
+  margin-top: 20px;
+}
 /*-------------------------------- google map --------------------------------*/
 .google-map {
   max-width: 800px;

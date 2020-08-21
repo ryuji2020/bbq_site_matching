@@ -20,6 +20,19 @@ $(function() {
     }
   });
 });
+//-------------------------------- comment -------------------------------------
+$(function() {
+  $('.read-more-btn').prevAll().hide();
+  $('.read-more-btn').click(function() {
+    if ($(this).prevAll().is(':hidden')) {
+      $(this).prevAll().slideDown();
+      $(this).text('閉じる');
+    } else {
+      $(this).prevAll().slideUp();
+      $(this).text('もっと見る');
+    }
+  });
+});
 //-------------------------- 画像表示 slickを使用 ------------------------------
 $(function() {
   $('.slider-for').slick({

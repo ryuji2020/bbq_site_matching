@@ -57,9 +57,10 @@
     <h3>コメント</h3>
     <div class="row mt30"> <!-- comment -->
       <div class="col-md-7 content" id="surplus_land_comments"> <!-- comment 表示 -->
-        <%= render @comments, surplus_land: @surplus_land %>
+        <%#= render @comments, surplus_land: @surplus_land %>
+        <%= render 'comments/comment_accordion', surplus_land: @surplus_land %>
       </div>
-      <div class="col-md-5"> <!-- comment form -->
+      <div class="col-md-5 mt30"> <!-- comment form -->
         <%= form_for @comment, url: surplus_land_comments_path(@surplus_land), remote: true do |f| %>
         <div id="error_messages">
           <%= render "users/shared/error_messages", resource: @comment %>
