@@ -1,4 +1,4 @@
-<% @latest_comments.each do |comment| %>
+<% latest_comments.each do |comment| %>
   <div class="row comment-row">
     <div class="comment-box">
       <div class="col-xs-2">
@@ -6,14 +6,14 @@
       </div>
       <div class="col-xs-10">
         <p><%= link_to comment.user.name, comment.user %></p>
-        <p><%= comment.body %> <%= link_to '削除', surplus_land_comment_path(surplus_land, comment), method: :delete, data: { confirm: '削除しますか？' }, remote: true if current_user?(comment.user) %></p>
+        <p><%= comment.body %> <%= link_to '削除', surplus_land_comment_path(surplus_land, comment), method: :delete, data: { confirm: '削除しますか？' } if current_user?(comment.user) %></p>
       </div>
     </div>
   </div>
 <% end %>
 
 <div class="more-comment">
-  <% @previous_comments.each_with_index do |comment, i| %>
+  <% previous_comments.each_with_index do |comment, i| %>
     <div class="row comment-row comment-<%= i %>">
       <div class="comment-box">
         <div class="col-xs-2">
@@ -21,7 +21,7 @@
         </div>
         <div class="col-xs-10">
           <p><%= link_to comment.user.name, comment.user %></p>
-          <p><%= comment.body %> <%= link_to '削除', surplus_land_comment_path(surplus_land, comment), method: :delete, data: { confirm: '削除しますか？' }, remote: true if current_user?(comment.user) %></p>
+          <p><%= comment.body %> <%= link_to '削除', surplus_land_comment_path(surplus_land, comment), method: :delete, data: { confirm: '削除しますか？' } if current_user?(comment.user) %></p>
         </div>
       </div>
     </div>
