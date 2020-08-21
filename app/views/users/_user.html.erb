@@ -1,21 +1,23 @@
-<div class="row">
-  <div class="col-xs-2"> <!-- icon -->
-    <%= link_to user do %>
+<div class="users-row">
+  <div class="row">
+    <div class="col-xs-2 col-sm-2"> <!-- icon -->
+      <%= link_to user do %>
       <%= gravatar_for(user, size: 50) %>
-    <% end %>
-  </div>
-  <div class="col-xs-10"> <!-- profile -->
-    <div class="row"> <!-- name, follow button -->
-      <div class="col-xs-10"> <!-- name -->
-        <%= link_to user do %>
-          <p><strong><%= user.name %></strong></p>
-        <% end %>
-      </div>
-      <div class="col-xs-2"> <!-- follow button -->
-        <%= render 'follow_form', user: user %>
-      </div>
+      <% end %>
     </div>
-    <div class=""> <!-- self introduction -->
+    <div class="col-xs-5"> <!-- profile -->
+      <%= link_to user do %>
+      <p style="margin-bottom: 5px;"><strong><%= user.name %></strong></p>
+      <% end %>
+      <p style="font-size: 14px; color: #777; margin-bottom: 5px;">@profile</p>
+    </div>
+    <div class="col-xs-5"> <!-- follow button -->
+      <%= render 'follow_form', user: user %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-10"> <!-- self introduction -->
       <p><%= user.profile %></p>
     </div>
   </div>

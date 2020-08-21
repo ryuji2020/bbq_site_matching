@@ -102,7 +102,8 @@ ul, ol {
 }
 /*-------------------------------- button ------------------------------------*/
 .btn.request {
-  width: 200px;
+  width: 185px;
+  border-radius: 30px;
 }
 /*================================ page_title ================================*/
 .page-title {
@@ -248,12 +249,14 @@ a.apply-again {
 }
 /*=============================== users show page ============================*/
 .content.profile {
-  margin-bottom: 40px;
   @media (max-width: 768px) {
     text-align: center;
     .profile-name-gender {
       text-align: left;
     }
+  }
+  @media (max-width: 992px) {
+    margin-bottom: 40px;
   }
   @media (min-width: 992px) {
     padding-left: 0;
@@ -272,6 +275,11 @@ a.apply-again {
   .own-surplus-land h3 {
     margin-top: 0;
   }
+}
+/*======================= users show follow page =============================*/
+.users-row + .users-row {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
 }
 /*============================== footer ======================================*/
 footer {

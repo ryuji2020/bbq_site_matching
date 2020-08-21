@@ -1,12 +1,12 @@
 <% provide(:title, @title) %>
 <% provide(:page_title, @page_title) %>
 
-<div class="row">
-  <div class="col-md-4"> <!-- profile -->
+<div class="row py50">
+  <div class="col-md-3"> <!-- profile -->
     <%= render 'profile', user: @user %>
   </div>
-  <div class="col-md-8 follow-user"> <!-- follow or follower -->
+  <div class="col-md-9 follow-user"> <!-- follow or follower -->
     <%= render @relationship_users %>
-    <%= paginate @relationship_users %>
+    <div class="text-center"><%= paginate @relationship_users %></div>
   </div>
 </div>
