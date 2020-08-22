@@ -73,6 +73,10 @@ ul, ol {
   margin-left: 30px;
 }
 
+.pt10 {
+  padding-top: 10px;
+}
+
 .pb50 {
   padding-bottom: 50px;
 }
@@ -104,6 +108,16 @@ ul, ol {
 .btn.request {
   width: 185px;
   border-radius: 30px;
+}
+/*-------------------------------- posted time -------------------------------*/
+.posted-time {
+  font-size: 14px;
+  color: #888;
+  text-align: right;
+}
+/*-------------------------------- row list ----------------------------------*/
+.row.row-list + .row.row-list {
+  border-top: 1px solid #ccc;
 }
 /*================================ page_title ================================*/
 .page-title {
@@ -227,10 +241,6 @@ a.apply-again {
 .comment-box {
   word-wrap: break-word;
   padding: 10px 0;
-}
-
-.row.comment-row + .row.comment-row {
-  border-top: 1px solid #ccc;
 }
 
 .row.comment-row.comment-0 {

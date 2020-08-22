@@ -1,5 +1,5 @@
 <% latest_comments.each do |comment| %>
-  <div class="row comment-row">
+  <div class="row comment-row row-list">
     <div class="comment-box">
       <div class="col-xs-2">
         <%= gravatar_for(comment.user, size: 60) %>
@@ -14,7 +14,7 @@
 
 <div class="more-comment">
   <% previous_comments.each_with_index do |comment, i| %>
-    <div class="row comment-row comment-<%= i %>">
+    <div class="row comment-row comment-<%= i %> row-list">
       <div class="comment-box">
         <div class="col-xs-2">
           <%= gravatar_for(comment.user, size: 60) %>

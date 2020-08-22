@@ -1,8 +1,10 @@
 <% provide(:title, 'Notification') %>
 <% provide(:page_title, '通知一覧') %>
 
-<% if @notifications.present? %>
-  <%= render @notifications %>
-<% else %>
+<div class="py50">
+  <% if @notifications.present? %>
+    <%= render @notifications %>
+  <% else %>
     <p>通知はありません</p>
-<% end %>
+  <% end %>
+</div>

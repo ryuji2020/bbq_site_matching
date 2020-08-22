@@ -2,12 +2,12 @@
   <div class="row">
     <div class="col-xs-2 col-sm-2"> <!-- icon -->
       <%= link_to user do %>
-      <%= gravatar_for(user, size: 50) %>
+        <%= gravatar_for(user, size: 50) %>
       <% end %>
     </div>
     <div class="col-xs-5"> <!-- profile -->
       <%= link_to user do %>
-      <p style="margin-bottom: 5px;"><strong><%= user.name %></strong></p>
+        <p style="margin-bottom: 5px;"><strong><%= user.name %></strong></p>
       <% end %>
       <p style="font-size: 14px; color: #777; margin-bottom: 5px;">@profile</p>
     </div>
