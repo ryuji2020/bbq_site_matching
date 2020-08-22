@@ -1,0 +1,18 @@
+<% if message.sender == current_user %>
+  <div class="send-field">
+    <div class="content message send-message">
+      <p><%= message.content %></p>
+    </div><br>
+    <%= link_to '取消', room_message_path(@room, message), method: :delete, data: { confirm: 'メッセージの送信を取り消しますか？' } %>
+  </div>
+<% else %>
+  <div class="receive-field">
+    <%= link_to message.sender do %>
+      <%= gravatar_for(message.sender, size: 30) %>
+    <% end %>
+    <%= message.sender.name %><br>
+    <div class="content message receive-message">
+      <p><%= message.content %></p>
+    </div>
+  </div>
+<% end %>

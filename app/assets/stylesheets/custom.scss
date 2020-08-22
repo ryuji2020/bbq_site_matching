@@ -126,6 +126,22 @@ ul, ol {
 .row.row-list + .row.row-list {
   border-top: 1px solid #ccc;
 }
+/*------------------------------ <br> pc or sp -------------------------------*/
+br.sp {
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+/*------------------------------- form ---------------------------------------*/
+.form-control {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+input[type=submit].form-control {
+  display: block;
+}
 /*================================ page_title ================================*/
 .page-title {
   @include ignore-container;
@@ -297,6 +313,45 @@ a.apply-again {
 .users-row + .users-row {
   border-top: 1px solid #ccc;
   padding-top: 10px;
+}
+/*============================== talk room ===================================*/
+.message-field {
+  padding-bottom: 30px;
+}
+
+.message-prompt {
+  line-height: 1.5em;
+  text-align: center;
+}
+
+.send-field, .receive-field {
+  padding: 10px 0;
+}
+
+.send-field {
+  text-align: right;
+  .send-message {
+    text-align: left;
+  }
+}
+
+.content.message {
+  display: inline-block;
+  max-width: 60%;
+  padding: 20px;
+  word-wrap: break-word;
+  @media (min-width: 1200px) {
+    max-width: 50%;
+  }
+}
+
+.content.send-message {
+  margin-left: auto;
+  background-color: #d1fffd;
+}
+
+.content.receive-message {
+  background-color: #d1ffdd;
 }
 /*============================== footer ======================================*/
 footer {
