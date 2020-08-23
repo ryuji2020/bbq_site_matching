@@ -1,65 +1,73 @@
 <% provide(:title, 'Edit user') %>
+<% provide(:page_title, 'アカウント設定') %>
 
-<%= render 'shared/page_title', page_title: 'アカウント設定' %>
+<div class="form-wrapper">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <div class="form-group">
+      <%= f.label :name, 'ユーザー名' %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :name, 'ユーザー名' %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
-  </div>
+    <div class="form-group">
+      <%= f.label :email, 'メールアドレス' %><br />
+      <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
-  </div>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div class="form-group">
+      <%= f.label :gender, '性別' %><br />
+      <%= f.select :gender, [['選択してください', nil], ['男', 'male'], ['女', 'female'], ['その他', 'other']], {}, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :profile, 'プロフィール' %><br />
+      <%= f.text_area :profile, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password, 'パスワード' %> <i>(変更がない場合は空白のままにしてください)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> 文字以上</em>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, 'パスワード確認' %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :current_password, '現在のパスワード' %> <i>(確認のため現在のパスワードを入力してください)</i><br />
+      <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "更新", class: 'btn btn-default form-control' %>
+    </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :gender, '性別' %><br />
-    <%= f.select :gender, [['選択してください', nil], ['男', 'male'], ['女', 'female'], ['その他', 'other']], {}, class: 'form-control' %>
+  <div class="gravatar-edit">
+    <%= gravatar_for(@user, size: 60) %>
+    <a href="http://gravatar.com/emails" target="_blank">変更する場合はこちら</a>
   </div>
 
-  <div class="form-group">
-    <%= f.label :profile, 'プロフィール' %><br />
-    <%= f.text_area :profile, class: 'form-control' %>
+  <div class="delete-form">
+    <h4 class="delete-form-title">
+      アカウントを削除する<br>
+      <span>本当によろしいですか？</span>
+    </h4>
+    <%= button_to "削除", registration_path(resource_name),
+      data: { confirm: "Are you sure?" },
+      method: :delete,
+      class: 'btn btn-default form-control delete-form-btn' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :password, 'パスワード' %> <i>(変更がない場合は空白のままにしてください)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> 文字以上</em>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password_confirmation, 'パスワード確認' %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :current_password, '現在のパスワード' %> <i>(確認のため現在のパスワードを入力してください)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit "更新", class: 'btn btn-default form-control' %>
-  </div>
-<% end %>
-
-<div class="gravatar_edit">
-  <%= gravatar_for(@user, size: 60) %>
-  <a href="http://gravatar.com/emails" target="_blank">change</a>
+  <%= link_to "Back", :back, class: 'devise-shared-link d-i-block' %>
 </div>
-
-<h3>アカウントを削除する</h3>
-
-<p>本当によろしいですか？ <%= button_to "削除", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-default form-control' %></p>
-
-<%= link_to "Back", :back %>

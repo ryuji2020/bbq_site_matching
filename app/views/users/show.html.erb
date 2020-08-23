@@ -1,24 +1,23 @@
 <% provide(:title, @user.name) %>
+<% provide(:page_title, 'プロフィール') %>
 
-<%= render 'shared/page_title', page_title: 'プロフィール' %>
-
-<div class="row">
-  <div class="col-md-4"> <!-- profile -->
+<div class="row py50">
+  <div class="col-md-3">
     <%= render 'users/profile', user: @user %>
   </div>
-  <div class="col-md-8"> <!-- surplus_land_item -->
-    <div class=""> <!-- own surplu land -->
+  <div class="col-md-9 users-surplus-lands">
+    <div class="own-surplus-land">
       <h3>貸し出しているキャンプ地＆BBQ場</h3>
       <div class="row">
         <%= render @own_surplus_lands, md: 4 %>
       </div>
     </div>
-    <div class=""> <!-- like -->
+    <div class="like-surplus-land">
       <h3>行ってみたい（お気に入り）キャンプ地＆BBQ場</h3>
       <div class="row">
         <%= render @like_surplus_lands, md: 4 %>
       </div>
-      <%= paginate @like_surplus_lands %>
+      <div class="text-center mt20"><%= paginate @like_surplus_lands %></div>
     </div>
   </div>
 </div>

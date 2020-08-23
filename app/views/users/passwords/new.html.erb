@@ -1,18 +1,19 @@
 <% provide(:title, 'Forgot password') %>
+<% provide(:page_title, 'パスワードをお忘れですか？') %>
 
-<%= render 'shared/page_title', page_title: 'パスワードをお忘れですか？' %>
+<div class="form-wrapper">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <div class="form-group">
+      <%= f.label :email, 'メールアドレス' %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-  </div>
+    <div class="form-group">
+      <%= f.submit "パスワードをリセットする", class: 'btn btn-default form-control' %>
+    </div>
+  <% end %>
 
-  <div class="form-group">
-    <%= f.submit "パスワードをリセットする", class: 'btn btn-default form-control' %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
+</div>

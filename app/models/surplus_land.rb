@@ -37,6 +37,10 @@ class SurplusLand < ApplicationRecord
     ).processed
   end
 
+  def sp_thumb
+    images.first.variant(resize: '500x500')
+  end
+
   # いいね通知作成
   def create_like_notification(current_user)
     unless Notification.find_by(visitor_id: current_user.id, visited_id: user_id, action: 'like')

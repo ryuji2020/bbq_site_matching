@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :correct_user, only: [:destroy]
 
   def create
-    @surplus_land = SurplusLand.find(params[:surplus_land_id])
+    @surplus_land = SurplusLand.includes(images_attachments: :blob).find(params[:surplus_land_id])
     @comment = current_user.comments.build(comment_params)
     @comment.surplus_land_id = @surplus_land.id
     if @comment.save
@@ -15,12 +15,19 @@ class CommentsController < ApplicationController
           flash[:success] = @message
           redirect_to @surplus_land
         end
-        format.js { @comments = @surplus_land.comments.includes(:user).page(params[:page]) } # pagenationにするか？未定
+        format.js do
+          @latest_comments = @surplus_land.comments.includes(:user).order(created_at: :desc).limit(3)
+          @previous_comments = @surplus_land.comments.includes(:user).order(created_at: :desc).offset(3)
+        end
       end
     else
-      @comments = @surplus_land.comments.includes(:user).page(params[:page]) # pagenationにするか？未定
+      @latest_comments = @surplus_land.comments.includes(:user).order(created_at: :desc).limit(3)
+      @previous_comments = @surplus_land.comments.includes(:user).order(created_at: :desc).offset(3)
       respond_to do |format|
-        format.html { render 'surplus_lands/show' }
+        format.html do
+          flash.now[:danger] = '400文字以内でコメントを入力してください'
+          render 'surplus_lands/show'
+        end
         format.js
       end
     end
@@ -34,7 +41,10 @@ class CommentsController < ApplicationController
         flash[:success] = 'コメントを削除しました'
         redirect_to @surplus_land
       end
-      format.js { @comments = @surplus_land.comments.includes(:user).page(params[:page]) } # pagenationにするか？未定
+      format.js do
+        @latest_comments = @surplus_land.comments.includes(:user).order(created_at: :desc).limit(3)
+        @previous_comments = @surplus_land.comments.includes(:user).order(created_at: :desc).offset(3)
+      end
     end
   end
 

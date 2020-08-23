@@ -1,14 +1,13 @@
 <% provide(:title, 'All Land') %>
+<% provide(:page_title, @page_title) %>
 
-<%= render 'shared/page_title', page_title: @page_title %>
-
-<div class="row">
+<div class="row pb50">
   <!-- sidebar -->
-  <div class="col-sm-3 panel-group" id="prefectureAccordion">
+  <div class="col-sm-3 panel-group mt50" id="prefectureAccordion">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="#prefectureAccordionCollapse1" data-toggle="collapse" data-parent="#prefectureAccordion">
+          <a href="#prefectureAccordionCollapse1" data-toggle="collapse" data-parent="#prefectureAccordion" class="prefecture-link">
             北海道・東北
           </a>
         </h3>
@@ -16,7 +15,7 @@
       <div class="panel-collapse collapse" id="prefectureAccordionCollapse1">
         <% @tohoku_hokkaido_prefectures.each do |prefecture| %>
           <div class="panel-body">
-            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture), class: 'prefecture-link' %>
           </div>
         <% end %>
       </div>
@@ -24,7 +23,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="#prefectureAccordionCollapse2" data-toggle="collapse" data-parent="#prefectureAccordion">
+          <a href="#prefectureAccordionCollapse2" data-toggle="collapse" data-parent="#prefectureAccordion" class="prefecture-link">
             関東
           </a>
         </h3>
@@ -32,7 +31,7 @@
       <div class="panel-collapse collapse" id="prefectureAccordionCollapse2">
         <% @kanto_prefectures.each do |prefecture| %>
           <div class="panel-body">
-            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture), class: 'prefecture-link' %>
           </div>
         <% end %>
       </div>
@@ -40,7 +39,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="#prefectureAccordionCollapse3" data-toggle="collapse" data-parent="#prefectureAccordion">
+          <a href="#prefectureAccordionCollapse3" data-toggle="collapse" data-parent="#prefectureAccordion" class="prefecture-link">
             中部
           </a>
         </h3>
@@ -48,7 +47,7 @@
       <div class="panel-collapse collapse" id="prefectureAccordionCollapse3">
         <% @chubu_prefectures.each do |prefecture| %>
           <div class="panel-body">
-            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture), class: 'prefecture-link' %>
           </div>
         <% end %>
       </div>
@@ -56,7 +55,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="#prefectureAccordionCollapse4" data-toggle="collapse" data-parent="#prefectureAccordion">
+          <a href="#prefectureAccordionCollapse4" data-toggle="collapse" data-parent="#prefectureAccordion" class="prefecture-link">
             近畿
           </a>
         </h3>
@@ -64,7 +63,7 @@
       <div class="panel-collapse collapse" id="prefectureAccordionCollapse4">
         <% @kinki_prefectures.each do |prefecture| %>
           <div class="panel-body">
-            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture), class: 'prefecture-link' %>
           </div>
         <% end %>
       </div>
@@ -72,7 +71,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="#prefectureAccordionCollapse5" data-toggle="collapse" data-parent="#prefectureAccordion">
+          <a href="#prefectureAccordionCollapse5" data-toggle="collapse" data-parent="#prefectureAccordion" class="prefecture-link">
             中国
           </a>
         </h3>
@@ -80,7 +79,7 @@
       <div class="panel-collapse collapse" id="prefectureAccordionCollapse5">
         <% @chugoku_prefectures.each do |prefecture| %>
           <div class="panel-body">
-            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture), class: 'prefecture-link' %>
           </div>
         <% end %>
       </div>
@@ -88,7 +87,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="#prefectureAccordionCollapse6" data-toggle="collapse" data-parent="#prefectureAccordion">
+          <a href="#prefectureAccordionCollapse6" data-toggle="collapse" data-parent="#prefectureAccordion" class="prefecture-link">
             四国
           </a>
         </h3>
@@ -96,7 +95,7 @@
       <div class="panel-collapse collapse" id="prefectureAccordionCollapse6">
         <% @shikoku_prefectures.each do |prefecture| %>
           <div class="panel-body">
-            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture), class: 'prefecture-link' %>
           </div>
         <% end %>
       </div>
@@ -104,7 +103,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="#prefectureAccordionCollapse7" data-toggle="collapse" data-parent="#prefectureAccordion">
+          <a href="#prefectureAccordionCollapse7" data-toggle="collapse" data-parent="#prefectureAccordion" class="prefecture-link">
             九州・沖縄
           </a>
         </h3>
@@ -112,7 +111,7 @@
       <div class="panel-collapse collapse" id="prefectureAccordionCollapse7">
         <% @okinawa_kyushu_prefectures.each do |prefecture| %>
           <div class="panel-body">
-            <%= link_to prefecture, refine_search_surplus_land_path(prefecture) %>
+            <%= link_to prefecture, refine_search_surplus_land_path(prefecture), class: 'prefecture-link' %>
           </div>
         <% end %>
       </div>
@@ -129,6 +128,6 @@
     <div class="row">
       <%= render @surplus_lands, md: 4 %>
     </div>
-    <%= paginate @surplus_lands %>
+    <div class="text-center mt20"><%= paginate @surplus_lands %></div>
   </div>
 </div>

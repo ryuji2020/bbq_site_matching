@@ -39,6 +39,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  paginates_per 10
+
+
   # surplus_landをお気に入りする
   def like(surplus_land)
     likes.create(surplus_land_id: surplus_land.id)

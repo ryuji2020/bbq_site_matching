@@ -1,0 +1,36 @@
+<% latest_comments.each do |comment| %>
+  <div class="row comment-row row-list">
+    <div class="comment-box">
+      <div class="col-xs-2">
+        <%= gravatar_for(comment.user, size: 60) %>
+      </div>
+      <div class="col-xs-10">
+        <p><%= link_to comment.user.name, comment.user %></p>
+        <p><%= comment.body %> <%= link_to '削除', surplus_land_comment_path(surplus_land, comment), method: :delete, data: { confirm: '削除しますか？' } if current_user?(comment.user) %></p>
+        <p class="posted-time"><%= time_ago_in_words(comment.created_at) %> ago</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="more-comment">
+  <% previous_comments.each_with_index do |comment, i| %>
+    <div class="row comment-row comment-<%= i %> row-list">
+      <div class="comment-box">
+        <div class="col-xs-2">
+          <%= gravatar_for(comment.user, size: 60) %>
+        </div>
+        <div class="col-xs-10">
+          <p><%= link_to comment.user.name, comment.user %></p>
+          <p><%= comment.body %> <%= link_to '削除', surplus_land_comment_path(surplus_land, comment), method: :delete, data: { confirm: '削除しますか？' } if current_user?(comment.user) %></p>
+          <p class="posted-time"><%= time_ago_in_words(comment.created_at) %> ago</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if @previous_comments.present? %>
+    <p class="read-more-btn">もっと見る</p>
+  <% elsif @latest_comments.blank? %>
+    <p>質問や感想などをコメントしましょう！</p>
+  <% end %>
+</div>

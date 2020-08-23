@@ -1,27 +1,28 @@
 <% provide(:title, 'Reset password') %>
+<% provide(:page_title, 'パスワードを再設定する') %>
 
-<%= render 'shared/page_title', page_title: 'パスワードを再設定する' %>
+<div class="form-wrapper">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+    <div class="form-group">
+      <%= f.label :password, "新しいパスワード" %><br />
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> 文字以上)</em><br />
+      <% end %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :password, "新しいパスワード" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> 文字以上)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control' %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "新しいパスワード（確認）" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :password_confirmation, "新しいパスワード（確認）" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-  </div>
+    <div class="form-group">
+      <%= f.submit "パスワードを変更する", class: 'btn btn-default form-control' %>
+    </div>
+  <% end %>
 
-  <div class="form-group">
-    <%= f.submit "パスワードを変更する", class: 'btn btn-default form-control' %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
+</div>

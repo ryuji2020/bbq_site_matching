@@ -1,7 +1,8 @@
-$('#surplus_land_comments').html("<%= j render @comments, surplus_land: @surplus_land %>");
+$('#surplus_land_comments').html("<%= escape_javascript(render 'comments/comment_accordion', surplus_land: @surplus_land, latest_comments: @latest_comments, previous_comments: @previous_comments) %>");
 <% if @message %>
   $('#comment_body').val('');
   $('#error_messages').empty();
 <% else %>
   $('#error_messages').html('<div class="red">400字以内でコメントを入力してください</div>')
 <% end %>
+$('.read-more-btn').empty();

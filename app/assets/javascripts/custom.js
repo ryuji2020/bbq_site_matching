@@ -8,7 +8,46 @@ $(function() {
     });
   });
 });
-//============== surplus_land show-pageの画像表示 slickを使用 ==================
+//================================== header ====================================
+$(function() {
+  setTimeout('move()');
+  $('.glyphicon.glyphicon-bell.red').parent().addClass('active-notice-icon')
+});
+
+function move() {
+  $('.active-notice-icon').animate({
+    marginTop: '-=10px'
+  }, 800).animate({
+    marginTop: '+=10px'
+  }, 800);
+  setTimeout('move()', 1600);
+}
+//======================== surplus_land show page ==============================
+$(function() {
+  $(window).resize(function() {
+    var w = $(window).width();
+    var x  = 992;
+    if (w <= x) {
+      $('.apply-btn').addClass('mt30 d-i-block');
+    } else {
+      $('.apply-btn').removeClass('mt30 d-i-block');
+    }
+  });
+});
+//-------------------------------- comment -------------------------------------
+$(function() {
+  $('.read-more-btn').prevAll().hide();
+  $('.read-more-btn').click(function() {
+    if ($(this).prevAll().is(':hidden')) {
+      $(this).prevAll().slideDown();
+      $(this).text('閉じる');
+    } else {
+      $(this).prevAll().slideUp();
+      $(this).text('もっと見る');
+    }
+  });
+});
+//-------------------------- 画像表示 slickを使用 ------------------------------
 $(function() {
   $('.slider-for').slick({
     slidesToShow: 1,
@@ -23,5 +62,17 @@ $(function() {
     asNavFor: '.slider-for',
     centerMode: true,
     focusOnSelect: true
+  });
+});
+//======================== surplus_land index page =============================
+$(function() {
+  $(window).resize(function() {
+    var w = $(window).width();
+    var x  = 768;
+    if (w <= x) {
+      $('#prefectureAccordion').removeClass('mt50');
+    } else {
+      $('#prefectureAccordion').addClass('mt50');
+    }
   });
 });
