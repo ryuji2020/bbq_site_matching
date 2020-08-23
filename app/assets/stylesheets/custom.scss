@@ -240,6 +240,9 @@ p.edit-image-form-text {
       font-weight: bold;
       text-align: center;
       line-height: 2em;
+      @media (max-width: 768px) {
+        font-size: 24px;
+      }
     }
   }
 }
