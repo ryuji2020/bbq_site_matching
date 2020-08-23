@@ -171,7 +171,9 @@ p.edit-image-form-text {
 }
 
 .delete-form {
-  margin-top: 40px;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
   input[type=submit].delete-form-btn {
     margin-top: 0;
   }
@@ -183,6 +185,16 @@ p.edit-image-form-text {
     color: red;
   }
 }
+/*------------------------------- gravatar edit ------------------------------*/
+.gravatar-edit {
+  margin-top: 30px;
+  a {
+    display: inline-block;
+    height: 100%;
+    vertical-align: bottom;
+    margin-left: 10px;
+  }
+}
 /*------------------------------ error message -------------------------------*/
 #error_explanation h2 {
   color: red;
@@ -191,6 +203,10 @@ p.edit-image-form-text {
 /*------------------------------ image model ---------------------------------*/
 .modal-image {
   width: 100%;
+}
+/*---------------------------- devise link -----------------------------------*/
+.devise-shared-link {
+  margin-top: 20px;
 }
 /*================================ page_title ================================*/
 .page-title {
