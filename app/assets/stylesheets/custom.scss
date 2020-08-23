@@ -208,6 +208,10 @@ p.edit-image-form-text {
 .devise-shared-link {
   margin-top: 20px;
 }
+/*================================ header ====================================*/
+.active-notice-icon {
+  display: inline-block;
+}
 /*================================ page_title ================================*/
 .page-title {
   @include ignore-container;

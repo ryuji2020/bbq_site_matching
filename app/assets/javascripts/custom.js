@@ -8,6 +8,20 @@ $(function() {
     });
   });
 });
+//================================== header ====================================
+$(function() {
+  setTimeout('move()');
+  $('.glyphicon.glyphicon-bell.red').parent().addClass('active-notice-icon')
+});
+
+function move() {
+  $('.active-notice-icon').animate({
+    marginTop: '-=10px'
+  }, 800).animate({
+    marginTop: '+=10px'
+  }, 800);
+  setTimeout('move()', 1600);
+}
 //======================== surplus_land show page ==============================
 $(function() {
   $(window).resize(function() {
