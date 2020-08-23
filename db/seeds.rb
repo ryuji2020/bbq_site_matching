@@ -55,7 +55,7 @@ users.each do |user|
     )
   end
 end
-# 画像を3枚づつ追加
+# 画像を3枚ずつ追加
 surplus_lands = SurplusLand.all
 surplus_lands.each_with_index do |surplus_land, i|
   surplus_land.images.attach(io: File.open(Rails.root.join("db/fixtures/image#{i}.jpg")), filename: "image#{i}.jpg")
@@ -92,3 +92,11 @@ following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 second_following.each { |followed| second_user.follow(followed) }
 second_followers.each { |follower| follower.follow(second_user) }
+
+# サンプルコメント
+comment_surplus_land = SurplusLand.where('id in (1, 2, 3, 10, 11, 12, 23, 24, 25)')
+users.each_with_index do |user, i|
+  comment_surplus_land.each do |surplus_land|
+    user.comments.create!(body: "Hello, comment #{i}", surplus_land_id: surplus_land.id)
+  end
+end
