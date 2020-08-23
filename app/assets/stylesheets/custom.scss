@@ -10,6 +10,13 @@ $site-color-light: #f7fff5;
   margin: 0 calc(50% - 50vw);
   width: 100vw;
 }
+
+@mixin form-style {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
 /*============================== common =====================================*/
 body {
   background-color: $site-color-light;
@@ -134,13 +141,56 @@ br.sp {
   }
 }
 /*------------------------------- form ---------------------------------------*/
-.form-control {
+.form-wrapper {
   max-width: 700px;
   margin: 0 auto;
+  padding: 50px 0;
 }
 
 input[type=submit].form-control {
   display: block;
+  margin-top: 40px
+}
+
+input[type=file], a.back-top-link {
+  @include form-style;
+}
+
+.form-group {
+  label {
+    display: block;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+
+p.edit-image-form-text {
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.delete-form {
+  margin-top: 40px;
+  input[type=submit].delete-form-btn {
+    margin-top: 0;
+  }
+}
+
+.delete-form-title {
+  span {
+    font-size: 14px;
+    color: red;
+  }
+}
+/*------------------------------ error message -------------------------------*/
+#error_explanation h2 {
+  color: red;
+  font-size: 20px;
+}
+/*------------------------------ image model ---------------------------------*/
+.modal-image {
+  width: 100%;
 }
 /*================================ page_title ================================*/
 .page-title {

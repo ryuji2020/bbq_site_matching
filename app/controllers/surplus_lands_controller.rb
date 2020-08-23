@@ -102,7 +102,7 @@ class SurplusLandsController < ApplicationController
   # before_action
 
   def correct_user
-    @surplus_land = SurplusLand.find(params[:id])
+    @surplus_land = SurplusLand.includes(images_attachments: :blob).find(params[:id])
     redirect_to root_url unless current_user?(@surplus_land.user)
   end
 
