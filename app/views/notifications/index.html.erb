@@ -4,6 +4,7 @@
 <div class="py50">
   <% if @notifications.present? %>
     <%= render @notifications %>
+    <div class="text-center mt20"><%= paginate @notifications %></div>
   <% else %>
     <p>通知はありません</p>
   <% end %>

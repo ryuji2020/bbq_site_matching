@@ -4,7 +4,7 @@
 <div class="py50">
   <div class="content">
     <div class="row">
-      <div class="col-md-6"> <!-- image -->
+      <div class="col-md-6">
         <ul class="slider-for">
           <% @surplus_land.images.each do |image| %>
             <li class="image-box"><%= image_tag image, class: 'image' %></li>
@@ -16,8 +16,7 @@
           <% end %>
         </ul>
       </div>
-      <div class="col-md-6"> <!-- description -->
-        <!-- 申し込みフォーム -->
+      <div class="col-md-6">
         <% if user_signed_in? && @surplus_land.user != current_user %>
           <% if room = find_room(@surplus_land, current_user) %>
             <div class="text-center">
@@ -55,11 +54,11 @@
 
   <div class="comment py50">
     <h3>コメント</h3>
-    <div class="row mt30"> <!-- comment -->
-      <div class="col-md-7 content" id="surplus_land_comments"> <!-- comment 表示 -->
+    <div class="row mt30">
+      <div class="col-md-7 content" id="surplus_land_comments">
         <%= render 'comments/comment_accordion', surplus_land: @surplus_land, latest_comments: @latest_comments, previous_comments: @previous_comments %>
       </div>
-      <div class="col-md-5 mt30"> <!-- comment form -->
+      <div class="col-md-5 mt30">
         <%= form_for @comment, url: surplus_land_comments_path(@surplus_land) do |f| %>
         <div id="error_messages"></div>
         <div class="form-group">
@@ -73,7 +72,7 @@
     </div>
   </div>
 
-  <div class="google-map" id="map"></div> <!-- google map api -->
+  <div class="google-map" id="map"></div>
 </div>
 
 <%= render 'shared/maps_script', hash: @hash %>

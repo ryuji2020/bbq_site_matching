@@ -5,7 +5,8 @@ class NotificationsController < ApplicationController
     @notifications = current_user.
       passive_notifications.
       where.not(visitor_id: current_user.id).
-      includes(:visitor, surplus_land: :user)
+      includes(:visitor, surplus_land: :user).
+      page(params[:page])
     if unchecked_notifications = @notifications.where(checked: false)
       unchecked_notifications.each do |notification|
         notification.update_attribute(:checked, true)
