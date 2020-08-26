@@ -20,17 +20,17 @@ RSpec.feature "Comments", type: :feature do
       visit surplus_land_path(surplus_land)
       # コメントが空白
       click_button 'コメントする'
-      expect(page).to have_content '400字以内でコメントを入力してください'
+      expect(page).to have_content '400文字以内でコメントを入力してください'
       expect(Comment.count).to eq 0
       # コメントが400字以上
       fill_in 'comment_body', with: 'comment' * 58
       click_button 'コメントする'
-      expect(page).to have_content '400字以内でコメントを入力してください'
+      expect(page).to have_content '400文字以内でコメントを入力してください'
       expect(Comment.count).to eq 0
       # 有効なコメント
       fill_in 'comment_body', with: 'Valid_Comment'
       click_button 'コメントする'
-      expect(page).to have_no_content '400字以内でコメントを入力してください'
+      expect(page).to have_no_content '400文字以内でコメントを入力してください'
       expect(page).to have_content 'Valid_Comment'
       expect(Comment.count).to eq 1
     end
