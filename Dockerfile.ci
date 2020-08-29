@@ -6,10 +6,14 @@ RUN apt-get update -qq && \
                        libpq-dev \
                        nodejs
 
-ENV APP_ROOT /bbq_site_matching
-ENV LANG C.UTF-8
-RUN mkdir $APP_ROOT
+RUN mkdir /usr/src/camp_site_matching
+ENV APP_ROOT /usr/src/camp_site_matching
 WORKDIR $APP_ROOT
+ENV LANG C.UTF-8
 
-COPY . $APP_ROOT
+ADD ./Gemfile $APP_ROOT/Gemfile
+ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock
+
+RUN gem install bundler -v 1.17.3
 RUN bundle install
+ADD . $APP_ROOT

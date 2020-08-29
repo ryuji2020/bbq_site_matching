@@ -1,0 +1,74 @@
+# Orb 'circleci/build-tools@2.6.3' resolved to 'circleci/build-tools@2.6.3'
+# Orb 'circleci/jq@1.9.1' resolved to 'circleci/jq@1.9.1'
+version: 2
+jobs:
+  rspec:
+    working_directory: ~/bbq_site_matching
+    docker:
+    - image: circleci/ruby
+    steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: Setup environment variables
+        command: |
+          echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
+    - run:
+        name: Start containers and verify it is working
+        command: |
+          set -x
+          sudo docker-compose up
+          # sudo docker exec bbq_site_matching_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+    - run:
+        name: Setup database
+        command: |
+          # docker-compose exec web bash -c 'bundle exec rails db:create'
+          # docker-compose exec web bash -c 'bundle exec rails db:migrate'
+          sudo docker-compose exec web bundle exec bin/rails db:schema:load --trace
+    - run:
+        name: Run rspec
+        command: sudo docker-compose exec web rspec
+workflows:
+  version: 2
+  build:
+    jobs:
+    - rspec
+
+# Original config.yml file:
+# version: 2.1
+# jobs:
+#   rspec:
+#     working_directory: ~/bbq_site_matching
+#     docker:
+#       - image: circleci/ruby
+#     steps:
+#       - checkout
+#       - setup_remote_docker
+#       - run:
+#           name: Setup environment variables
+#           command: |
+#             echo \"export COMPOSE_FILE=docker-compose.ci.yml\" >> $BASH_ENV
+#       - run:
+#           name: Start containers and verify it is working
+#           command: |
+#             set -x
+#             sudo docker-compose up
+#             # sudo docker exec bbq_site_matching_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+#       - run:
+#           name: Setup database
+#           command: |
+#             # docker-compose exec web bash -c 'bundle exec rails db:create'
+#             # docker-compose exec web bash -c 'bundle exec rails db:migrate'
+#             sudo docker-compose exec web bundle exec bin/rails db:schema:load --trace
+#       - run:
+#           name: Run rspec
+#           command: sudo docker-compose exec web rspec
+# 
+# orbs:
+#   build-tools: circleci/build-tools@2.6.3
+#   jq: circleci/jq@1.9.1
+# workflows:
+#   version: 2.1
+#   build:
+#     jobs:
+#       - rspec

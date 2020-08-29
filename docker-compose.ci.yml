@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ci
-    container_name: outdoor_app
+    container_name: outdoor_web_container
     ports:
       - "3000:3000"
     environment:

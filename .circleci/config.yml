@@ -15,16 +15,17 @@ jobs:
           name: Start containers and verify it is working
           command: |
             set -x
-            docker-compose up -d
-            docker exec outdoor_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+            sudo docker-compose up
+            # sudo docker exec bbq_site_matching_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
           name: Setup database
           command: |
-            docker-compose exec web bash -c 'bundle exec rails db:create'
-            docker-compose exec web bash -c 'bundle exec rails db:migrate'
+            # docker-compose exec web bash -c 'bundle exec rails db:create'
+            # docker-compose exec web bash -c 'bundle exec rails db:migrate'
+            sudo docker-compose exec web bundle exec bin/rails db:schema:load --trace
       - run:
           name: Run rspec
-          command: docker-compose exec web rspec
+          command: sudo docker-compose exec web rspec
 
 orbs:
   build-tools: circleci/build-tools@2.6.3
