@@ -13,13 +13,16 @@ jobs:
 #  ①注意！！ bundlerのバージョンが2.0.1以上だと、bundle installに失敗します。ここに環境として指定します。
           BUNDLER_VERSION: 1.17.3
 #  ②注意！！ circleCIは仮想環境を構築するので、そのときに使うデータベースを指定する必要があります。
-          RAILS_ENV: 'test'
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: root
+          DB_PASSWORD: password
       # Mysqlのバージョン5.6で動かしていたため、5.6を指定
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-          MYSQL_ROOT_HOST: '%'
-
+          MYSQL_DATABASE: ci_test
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: password
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
