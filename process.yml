@@ -1,74 +1,59 @@
-# Orb 'circleci/build-tools@2.6.3' resolved to 'circleci/build-tools@2.6.3'
-# Orb 'circleci/jq@1.9.1' resolved to 'circleci/jq@1.9.1'
 version: 2
 jobs:
-  rspec:
-    working_directory: ~/bbq_site_matching
+  build:
     docker:
-    - image: circleci/ruby
+    - image: circleci/ruby:2.5.3-node-browsers
+      environment:
+        BUNDLER_VERSION: 1.17.3
+        RAILS_ENV: test
+    - image: circleci/mysql:5.7
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+        MYSQL_ROOT_HOST: '%'
+    working_directory: ~/bbq_site_matching
     steps:
     - checkout
-    - setup_remote_docker
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "Gemfile.lock" }}
+        - v1-dependencies-
     - run:
-        name: Setup environment variables
+        name: install dependencies
         command: |
-          echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
+          gem install bundler -v 1.17.3
+          bundle install --jobs=4 --retry=3 --path vendor/bundle
+          gem install rspec_junit_formatter
+    - save_cache:
+        paths:
+        - ./vendor/bundle
+        key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+    - run: mv config/database.yml.ci config/database.yml
+    - run: bundle exec rails db:create
+    - run: bundle exec rails db:schema:load
     - run:
-        name: Start containers and verify it is working
+        name: Rubocop
+        command: bundle exec rubocop
+    - run:
+        name: run tests
         command: |
-          set -x
-          sudo docker-compose up
-          # sudo docker exec bbq_site_matching_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
-    - run:
-        name: Setup database
-        command: |
-          # docker-compose exec web bash -c 'bundle exec rails db:create'
-          # docker-compose exec web bash -c 'bundle exec rails db:migrate'
-          sudo docker-compose exec web bundle exec bin/rails db:schema:load --trace
-    - run:
-        name: Run rspec
-        command: sudo docker-compose exec web rspec
+          mkdir /tmp/test-results
+          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+            circleci tests split --split-by=timings)"
+          bundle exec rspec \
+            --format progress \
+            --format RspecJunitFormatter \
+            --out /tmp/test-results/rspec.xml \
+            --format progress \
+            $TEST_FILES
+    - store_test_results:
+        path: /tmp/test-results
+    - store_artifacts:
+        path: /tmp/test-results
+        destination: test-results
+    environment:
+    - CIRCLE_COMPARE_URL: https://github.com/ryuji2020/bbq_site_matching/compare/23f4b2fce7a4f73f8768bf4cd9831f61fa8948c2...23f4b2fce7a4f73f8768bf4cd9831f61fa8948c2
 workflows:
   version: 2
-  build:
+  workflow:
     jobs:
-    - rspec
-
-# Original config.yml file:
-# version: 2.1
-# jobs:
-#   rspec:
-#     working_directory: ~/bbq_site_matching
-#     docker:
-#       - image: circleci/ruby
-#     steps:
-#       - checkout
-#       - setup_remote_docker
-#       - run:
-#           name: Setup environment variables
-#           command: |
-#             echo \"export COMPOSE_FILE=docker-compose.ci.yml\" >> $BASH_ENV
-#       - run:
-#           name: Start containers and verify it is working
-#           command: |
-#             set -x
-#             sudo docker-compose up
-#             # sudo docker exec bbq_site_matching_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
-#       - run:
-#           name: Setup database
-#           command: |
-#             # docker-compose exec web bash -c 'bundle exec rails db:create'
-#             # docker-compose exec web bash -c 'bundle exec rails db:migrate'
-#             sudo docker-compose exec web bundle exec bin/rails db:schema:load --trace
-#       - run:
-#           name: Run rspec
-#           command: sudo docker-compose exec web rspec
-# 
-# orbs:
-#   build-tools: circleci/build-tools@2.6.3
-#   jq: circleci/jq@1.9.1
-# workflows:
-#   version: 2.1
-#   build:
-#     jobs:
-#       - rspec
+    - build
