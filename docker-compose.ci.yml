@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - default
+    ports:
+      - "3306:3306"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.ci
+    container_name: outdoor_app
+    ports:
+      - "3000:3000"
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: mysql
+    depends_on:
+      - db
+    networks:
+      - default
+    command: bundle exec rails server -b 0.0.0.0

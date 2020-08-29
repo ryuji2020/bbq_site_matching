@@ -1,3 +1,4 @@
+# -*- mode: dockerfile -*-
 FROM ruby:2.5.3
 
 RUN apt-get update -qq && \
@@ -5,13 +6,10 @@ RUN apt-get update -qq && \
                        libpq-dev \
                        nodejs
 
-RUN mkdir /app_name
-ENV APP_ROOT /app_name
-WORKDIR $APP_ROOT
+ENV APP_ROOT /bbq_site_matching
 ENV LANG C.UTF-8
+RUN mkdir $APP_ROOT
+WORKDIR $APP_ROOT
 
-ADD ./Gemfile $APP_ROOT/Gemfile
-ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock
-
+COPY . $APP_ROOT
 RUN bundle install
-ADD . $APP_ROOT

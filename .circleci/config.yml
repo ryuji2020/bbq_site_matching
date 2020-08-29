@@ -1,7 +1,36 @@
 version: 2.1
 jobs:
-  build:
+  rspec:
+    working_directory: ~/bbq_site_matching
     docker:
-      - image: circleci/golang:1.11.2
+      - image: circleci/ruby
     steps:
-      - run: echo "hello world"
+      - checkout
+      - setup_remote_docker
+      - run:
+        name: Setup environment variables
+        command: |
+          echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
+      - run:
+        name: Start containers and verify it is working
+        command: |
+          set -x
+          docker-compose up -d
+          docker exec outdoor_app curl --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+      - run:
+        name: Setup database
+        command: |
+          docker-compose exec web bash -c 'bundle exec rails db:create'
+          docker-compose exec web bash -c 'bundle exec rails db:migrate'
+      -run:
+        name: Run rspec
+        command: docker-compose exec web rspec
+
+orbs:
+  build-tools: circleci/build-tools@2.6.3
+  jq: circleci/jq@1.9.1
+wordflows:
+  version: 2.1
+  build:
+    jobs:
+      - rspec
