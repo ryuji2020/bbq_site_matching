@@ -29,7 +29,7 @@ jobs:
 orbs:
   build-tools: circleci/build-tools@2.6.3
   jq: circleci/jq@1.9.1
-wordflows:
+workflows:
   version: 2.1
   build:
     jobs:
