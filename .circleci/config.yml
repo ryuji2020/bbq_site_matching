@@ -17,6 +17,7 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_USERNAME: root
           DB_PASSWORD: password
+          
       # Mysqlのバージョン5.6で動かしていたため、5.6を指定
       - image: circleci/mysql:5.7
         environment:
