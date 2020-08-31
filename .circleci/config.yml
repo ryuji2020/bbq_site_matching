@@ -17,7 +17,7 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_USERNAME: root
           DB_PASSWORD: password
-
+          
       # Mysqlのバージョン5.6で動かしていたため、5.6を指定
       - image: circleci/mysql:5.7
         environment:
@@ -46,6 +46,10 @@ jobs:
           command: |
             gem install bundler -v 1.17.3
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+            sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+            sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo apt update
+            sudo apt-get install google-chrome-stable
 
       - save_cache:
           paths:
