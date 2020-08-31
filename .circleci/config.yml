@@ -7,18 +7,14 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      # ruby2.5.1を使ったアプリのため
       - image: circleci/ruby:2.5.3-node-browsers
         environment:
-#  ①注意！！ bundlerのバージョンが2.0.1以上だと、bundle installに失敗します。ここに環境として指定します。
           BUNDLER_VERSION: 1.17.3
-#  ②注意！！ circleCIは仮想環境を構築するので、そのときに使うデータベースを指定する必要があります。
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
           DB_USERNAME: root
           DB_PASSWORD: password
           
-      # Mysqlのバージョン5.6で動かしていたため、5.6を指定
       - image: circleci/mysql:5.7
         environment:
           MYSQL_DATABASE: ci_test
@@ -33,7 +29,6 @@ jobs:
 
     steps:
       - checkout
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -56,19 +51,17 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-# ②ちょっと無理やりですが、database.ymlとdatabase.yml.ciを入れ替える記述です。
       - run: mv config/database.yml.ci config/database.yml
 
       # Database setup
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
 
-# rubocopを走らせる記述です。
+      # run rubocop!
       - run:
           name: Rubocop
           command: bundle exec rubocop
 
-# rspecを走らせる記述です。
       # run tests!
       - run:
           name: run tests
