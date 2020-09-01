@@ -7,3 +7,5 @@ test:
   host: '127.0.0.1'
   database: ci_test
   password: password
+  variables:
+    sql_mode: TRADITIONAL
