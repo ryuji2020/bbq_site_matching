@@ -75,6 +75,7 @@ jobs:
               --out /tmp/test-results/rspec.xml \
               --format progress \
               $TEST_FILES
+          no_output_timeout: 3m
 
       # collect reports
       - store_test_results:

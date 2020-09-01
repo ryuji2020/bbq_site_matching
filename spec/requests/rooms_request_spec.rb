@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Rooms", type: :request do
+RSpec.xdescribe "Rooms", type: :request do
   let(:surplus_land) { create(:surplus_land, :with_prefecture, :with_user) }
   let(:visitor) { create(:user) }
 

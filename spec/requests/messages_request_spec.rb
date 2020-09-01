@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Messages", type: :request do
+RSpec.xdescribe "Messages", type: :request do
   let(:surplus_land) { create(:surplus_land, :with_prefecture, :with_user) }
   let(:visitor) { create(:user) }
   let(:room) { create(:room, surplus_land: surplus_land, visitor: visitor) }
