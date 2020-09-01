@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Relationships", type: :request do
+RSpec.xdescribe "Relationships", type: :request do
   let(:user) { create(:user) }
   let(:michael) { create(:user, name: 'michael') }
 

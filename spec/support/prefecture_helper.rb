@@ -49,7 +49,7 @@ module PrefectureHelper
       '鹿児島県',
       '沖縄県',
     ].each_with_index do |prefecture, i|
-      FactoryBot.create(:prefecture, name: prefecture)
+      FactoryBot.create(:prefecture, name: prefecture, id: i + 1)
     end
   end
 end

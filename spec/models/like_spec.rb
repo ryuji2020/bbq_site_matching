@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Like, type: :model do
+RSpec.xdescribe Like, type: :model do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
   let(:surplus_land) { create(:surplus_land, :with_prefecture, user: user) }
