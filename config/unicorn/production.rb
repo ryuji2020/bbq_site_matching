@@ -6,7 +6,7 @@ $pid = File.expand_path 'tmp/pids/unicorn.pid', $app_dir
 $std_log = File.expand_path 'log/unicorn.log', $app_dir
 
 worker_processes $worker
-working_derectory $app_dir
+working_directory $app_dir
 stderr_path $std_log
 stdout_path $std_log
 timeout $timeout
