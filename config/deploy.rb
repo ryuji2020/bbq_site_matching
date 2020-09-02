@@ -25,7 +25,7 @@ set :log_level, :debug
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/settings.yml"
+append :linked_files, "config/database.yml", 'config/master.key'
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor/bundle"
@@ -49,11 +49,22 @@ namespace :deploy do
   end
 
   desc 'Create database'
-  task ':db_create' do
+  task :db_create do
     on roles(:db) do |host|
       with rails_env: fetch(:rails_env) do
         within current_path do
           execute :bundle, :exec, :rails, 'db:create'
+        end
+      end
+    end
+  end
+
+  desc 'Run seed'
+  task :seed do
+    on roles(:app) do
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:seed'
         end
       end
     end

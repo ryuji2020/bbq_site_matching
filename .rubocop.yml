@@ -57,3 +57,5 @@ AllCops:
     - 'path/ruby'
     - 'spec/spec_helper.rb'
     - 'config/unicorn.conf.rb'
+    - 'config/deploy/*'
+    - 'config/unicorn/*'

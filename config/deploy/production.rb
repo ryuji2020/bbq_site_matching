@@ -42,20 +42,20 @@ server "13.115.89.52", user: "ryuji", roles: %w{app db web}
 # Global options
 # --------------
  set :ssh_options, {
-   keys: %w(~/.ssh/outdoor_key_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
+   keys: %w(File.expand_path('~/.ssh/my-key.pem'), File.expand_path('~/.ssh/id_rsa')),
+   forward_agent: true,
+   auth_methods: %w(publickey)
  }
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
-# server "example.com",
-#   user: "user_name",
-#   roles: %w{web app},
+# server "13.115.89.52",
+#   user: "ec2-user",
+#   roles: %w{web db app},
 #   ssh_options: {
-#     user: "user_name", # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: "please use keys"
-#   }
+#     user: "ec2-user", # overrides user setting above
+#     keys: %w(~/.ssh/my-key.pem, ~/.ssh/id_rsa),
+#     forward_agent: true,
+    # auth_methods: %w(publickey password)
+    # password: "please use keys"
+  # }
