@@ -111,8 +111,8 @@ jobs:
             - '2e:00:2b:a0:e0:ad:2a:49:e6:d1:01:c8:c5:0d:64:16'
       - deploy:
           name: Capistrano deploy
-          command: bundle exec cap production deploy
           command: |
+            bundle exec cap production deploy
             IP=`curl ifconfig.me`
             aws ec2 revoke-security-group-ingress \
               --group-id sg-056741eabece28fd5 --protocol tcp --port 22 --cidr ${IP}/32
