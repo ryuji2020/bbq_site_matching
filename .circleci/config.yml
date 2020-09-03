@@ -112,6 +112,10 @@ jobs:
       - deploy:
           name: Capistrano deploy
           command: bundle exec cap production deploy
+          command: |
+            IP=`curl ifconfig.me`
+            aws ec2 revoke-security-group-ingress \
+              --group-id sg-056741eabece28fd5 --protocol tcp --port 22 --cidr ${IP}/32
 
 workflows:
   version: 2.1
@@ -123,6 +127,6 @@ workflows:
           requires:
             - test
             - rubocop
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master

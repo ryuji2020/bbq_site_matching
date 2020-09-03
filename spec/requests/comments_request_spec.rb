@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Comments", type: :request do
+RSpec.xdescribe "Comments", type: :request do
   let(:user) { create(:user) }
   let(:surplus_land) { create(:surplus_land, state: '東京都', user: user) }
 

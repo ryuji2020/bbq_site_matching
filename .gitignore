@@ -28,3 +28,6 @@
 
 # Ignore dotenv-rails
 /.env
+
+# Ignore circleci local excute file
+/process.yml
