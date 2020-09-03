@@ -42,7 +42,7 @@ server "13.115.89.52", user: "ryuji", roles: %w{app db web}
 # Global options
 # --------------
  set :ssh_options, {
-   keys: %w(File.expand_path('~/.ssh/my-key.pem'), File.expand_path('~/.ssh/id_rsa')),
+   keys: ENV['PRODUCTION_SSH_KEY'].split(','),
    forward_agent: true,
    auth_methods: %w(publickey)
  }

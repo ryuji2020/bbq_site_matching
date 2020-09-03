@@ -108,7 +108,8 @@ jobs:
               --group-id sg-056741eabece28fd5 --protocol tcp --port 22 --cidr ${IP}/32
       - add_ssh_keys:
           fingerprints:
-            - '2e:00:2b:a0:e0:ad:2a:49:e6:d1:01:c8:c5:0d:64:16'
+            - 2e:00:2b:a0:e0:ad:2a:49:e6:d1:01:c8:c5:0d:64:16
+            - 81:ff:12:16:ff:1d:a1:d6:f8:d4:c3:20:a5:fa:63:d4
       - deploy:
           name: Capistrano deploy
           command: |
