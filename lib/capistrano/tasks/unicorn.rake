@@ -53,4 +53,6 @@ namespace :unicorn do
       force_stop_unicorn
     end
   end
+
+  after 'deploy:publishing', 'unicorn:restart'
 end
