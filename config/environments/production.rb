@@ -47,7 +47,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  # config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -70,30 +70,30 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   # deploy to AWS
-  # host = '13.115.89.52'
-  # config.action_mailer.default_url_options = { host: host }
-  # ActionMailer::Base.smtp_settings = {
-  #   :address        => 'smtp.gmail.com',
-  #   :port           => '587',
-  #   :authentication => :login,
-  #   :user_name      => Rails.application.credentials.dig(:gmail, :username),
-  #   :password       => Rails.application.credentials.dig(:gmail, :password),
-  #   :domain         => 'smtp.gmail.com',
-  #   :enable_starttls_auto => true
-  # }
-
-  # deploy to heroku
-  host = 'camp-site-matching.herokuapp.com'
+  host = '13.115.89.52'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
+    :address        => 'smtp.gmail.com',
     :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
+    :authentication => :login,
+    :user_name      => Rails.application.credentials.dig(:gmail, :username),
+    :password       => Rails.application.credentials.dig(:gmail, :password),
+    :domain         => 'smtp.gmail.com',
     :enable_starttls_auto => true
   }
+
+  # deploy to heroku
+  # host = 'camp-site-matching.herokuapp.com'
+  # config.action_mailer.default_url_options = { host: host }
+  # ActionMailer::Base.smtp_settings = {
+  #   :address        => 'smtp.sendgrid.net',
+  #   :port           => '587',
+  #   :authentication => :plain,
+  #   :user_name      => ENV['SENDGRID_USERNAME'],
+  #   :password       => ENV['SENDGRID_PASSWORD'],
+  #   :domain         => 'heroku.com',
+  #   :enable_starttls_auto => true
+  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
