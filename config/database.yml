@@ -50,8 +50,13 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
+# deploy to AWS
+  # <<: *default
+  # database: <%= Rails.application.credentials.dig(:db, :name) %>
+  # username: <%= Rails.application.credentials.dig(:db, :username) %>
+  # password: <%= Rails.application.credentials.dig(:db, :password) %>
+  # host: <%= Rails.application.credentials.dig(:db, :hostname) %>
+
+# deploy to heroku
   <<: *default
-  database: <%= Rails.application.credentials.dig(:db, :name) %>
-  username: <%= Rails.application.credentials.dig(:db, :username) %>
-  password: <%= Rails.application.credentials.dig(:db, :password) %>
-  host: <%= Rails.application.credentials.dig(:db, :hostname) %>
+  url: <%= ENV['JAWSDB_URL']&.sub('mysql://', 'mysql2://') %>
