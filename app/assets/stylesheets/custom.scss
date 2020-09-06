@@ -388,6 +388,11 @@ a.apply-again {
   padding-top: 10px;
 }
 /*============================== talk room ===================================*/
+.talk-room {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
 .message-field {
   padding-bottom: 30px;
 }
@@ -413,9 +418,6 @@ a.apply-again {
   max-width: 60%;
   padding: 20px;
   word-wrap: break-word;
-  @media (min-width: 1200px) {
-    max-width: 50%;
-  }
 }
 
 .content.send-message {

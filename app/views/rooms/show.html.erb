@@ -1,7 +1,7 @@
 <% provide(:title, 'Talk Room') %>
 <% provide(:page_title, @room.surplus_land.title) %>
 
-<div class="py50">
+<div class="py50 talk-room">
   <h3 class="message-prompt">
     <% if current_user == @room.owner %>
     <%= @room.visitor.name %>が<br class="sp">あなたのキャンプ地に来たいと言っています！
